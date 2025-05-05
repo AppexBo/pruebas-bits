@@ -37,8 +37,8 @@
                             <div class="row">
                                 <div class="col-12">
                                     <strong>Producto:</strong>
-                                    <t t-if="product['product_id']">
-                                        <span t-esc="env['product.product'].browse(product['product_id']).name"/>
+                                    <t t-if="product['product_data']">
+                                        <span t-esc="env['product.product'].browse(product['product_data']).name"/>
                                     </t>
                                 </div>
                             </div>
