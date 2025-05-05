@@ -27,7 +27,7 @@
     </record>
     <!-- action -->
     <record id="report_movement_history_action" model="ir.actions.act_window">
-        <field name="name">Reporteaaa de Historial de Movimientos</field>
+        <field name="name">Reporte de Historial de Movimientos</field>
         <field name="res_model">report.movement.history</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">form</field>

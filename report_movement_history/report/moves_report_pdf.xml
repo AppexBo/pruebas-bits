@@ -37,6 +37,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <strong>Producto:</strong>
+                                    <span t-esc="products[0].name"/>
                                 </div>
                             </div>
 
