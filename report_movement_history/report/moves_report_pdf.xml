@@ -39,7 +39,7 @@
                                     <strong>Producto:</strong>
 
                                     
-                                    <t t-foreach="products" t-as="ppp">
+                                    <t t-foreach="form['products']" t-as="ppp">
                                         <p>Nombre: <span t-esc="ppp.name"/></p>
                                         <!-- otros campos que quieras mostrar -->
                                     </t>
