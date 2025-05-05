@@ -37,7 +37,14 @@
                             <div class="row">
                                 <div class="col-12">
                                     <strong>Producto:</strong>
-                                    <span t-esc="products[0].name"/>
+
+                                    
+                                    <t t-foreach="products[0]" t-as="key">
+                                        <p><span t-esc="key"/>: <span t-esc="form[key]"/></p>
+                                    </t>
+
+
+
                                 </div>
                             </div>
 
