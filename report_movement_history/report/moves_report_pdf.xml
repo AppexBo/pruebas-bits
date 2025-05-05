@@ -34,6 +34,13 @@
                     <t t-foreach="form['data']" t-as="product">
                         <div class="product-section">
                         
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>Producto:</strong>
+                                    <span t-esc="product['data_product'].name"/>
+                                </div>
+                            </div>
+
                             <div class="row mb-2">
                                 <div class="col-3">
                                     <strong>Saldo Inicial:</strong>
@@ -53,7 +60,6 @@
                                 </div>
                             </div>
 
-                            
                             <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr>

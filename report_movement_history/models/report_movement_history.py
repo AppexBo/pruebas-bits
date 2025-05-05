@@ -106,7 +106,7 @@ class ReportMovementHistory(models.Model):
         prods = self.env['product.product'].search([('id', 'in', products)])
 
         return{
-            'products': prods,
+            #'products': prods,
             'data': list(self._process_moves(products, all_moves, aux_start_date, location))
         }
         
@@ -155,6 +155,7 @@ class ReportMovementHistory(models.Model):
                     lst.append(temp_dict)
 
             yield {
+                'data_product': product,
                 'opening_balance': opening_balance,
                 'balance': balance,
                 'total_in': total_in,
