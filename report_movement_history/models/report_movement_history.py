@@ -106,7 +106,7 @@ class ReportMovementHistory(models.Model):
         prods = self.env['product.product'].search([('id', 'in', products)])
 
         return{
-            'products': prods,
+            #'products': prods,
             'data': list(self._process_moves(products, all_moves, aux_start_date, location))
         }
         
@@ -119,7 +119,8 @@ class ReportMovementHistory(models.Model):
             opening_balance = 0
             balance = 0
             moves = all_moves.filtered(lambda r: r.product_id.id==product)
-
+            product_data = self.env['product.product'].search([('id', '=', product)])
+            
             if moves:
                 # Cálculo del balance inicial (antes de date_start)
                 balance = sum(
@@ -160,6 +161,7 @@ class ReportMovementHistory(models.Model):
                 'total_in': total_in,
                 'total_out': total_out,
                 'lst': lst,
+                'product_data': product_data,
             }
 
     @staticmethod

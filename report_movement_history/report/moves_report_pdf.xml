@@ -37,15 +37,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <strong>Producto:</strong>
-
-                                    
-                                    <t t-foreach="form['products']" t-as="ppp">
-                                        <p>Nombre: <span t-esc="ppp.name"/></p>
-                                        <!-- otros campos que quieras mostrar -->
-                                    </t>
-
-
-
+                                    <span t-esc="product['product_data'].name"/>
                                 </div>
                             </div>
 
