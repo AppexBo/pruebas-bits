@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        
+        <record id="l10n_py_endpoint_01" model="l10n.py.endpoint">
+            <field name="name">Envío de documentos</field>
+            <field name="operation_type">send</field>
+            <field name="url">https://api-sandbox.hermesweb.net/api/Document/SendDocumentToAuthority</field>
+            <field name="method">POST</field>
+            <field name="description">El envío de documentos por este método se realiza de forma Asincrónica con la entidad tributaria.
+                El documento recibido es transformado al modelo de XML definido por la entidad tributaria de cada localidad.
+            </field>
+        </record>
+
+        <record id="l10n_py_endpoint_01_production" model="l10n.py.endpoint">
+            <field name="name">Envío de documentos (Produccion)</field>
+            <field name="operation_type">send</field>
+            <field name="url">https://api.hermesweb.net/api/Document/SendDocumentToAuthority</field>
+            <field name="method">POST</field>
+            <field name="description">El envío de documentos por este método se realiza de forma Asincrónica con la entidad tributaria.
+                El documento recibido es transformado al modelo de XML definido por la entidad tributaria de cada localidad.
+            </field>
+        </record>
+        
+        <!--
+            <field name="url">https://api.hermesweb.net/api/Document/SendDocumentToAuthority</field>
+            
+        
+         -->
+        
+        <record id="l10n_py_endpoint_02" model="l10n.py.endpoint">
+            <field name="name">Consulta de documento</field>
+            <field name="operation_type">request</field>
+            <field name="url">https://api-sandbox.hermesweb.net/api/Document/QueryStatus?cdc=</field>
+            <field name="method">GET</field>
+            <field name="description">Esta consulta de documento devuelve la información básica del mismo y los estados indicados en la solicitud.</field>
+        </record>
+
+        <record id="l10n_py_endpoint_03" model="l10n.py.endpoint">
+            <field name="name">Descarga PDF</field>
+            <field name="operation_type">request</field>
+            <field name="url">https://api-sandbox.hermesweb.net/api/Document/getPDF?cdc=</field>
+            <field name="method">GET</field>
+            <field name="description">Para obtener el pdf de un documento es necesario consumir el método getPDF con el parámetro CDC en la URL.
+                El retorno que devolverá esta api es una estructura JSON con la información solicitada.</field>
+        </record>
+
+        <record id="l10n_py_endpoint_03_production" model="l10n.py.endpoint">
+            <field name="name">Descarga PDF (Produccion)</field>
+            <field name="operation_type">request</field>
+            <field name="url">https://api.hermesweb.net/api/Document/getPDF?cdc=</field>
+            <field name="method">GET</field>
+            <field name="description">Para obtener el pdf de un documento es necesario consumir el método getPDF con el parámetro CDC en la URL.
+                El retorno que devolverá esta api es una estructura JSON con la información solicitada.</field>
+        </record>
+        
+
+        <record id="l10n_py_endpoint_04" model="l10n.py.endpoint">
+            <field name="name">Obtener xml</field>
+            <field name="operation_type">request</field>
+            <field name="url">https://api-sandbox.hermesweb.net/api/File/DownloadDocumentXml?cdc=</field>
+            <field name="method">GET</field>
+            <field name="description">Esta consulta de documento devuelve el documento solicitado en formato xml. La petición podrá realizarse enviando el CDC por parámetro en la misma URL.
+                Este método se utiliza para obtener información de un único documento.</field>
+        </record>
+        
+    </data>
+</odoo>

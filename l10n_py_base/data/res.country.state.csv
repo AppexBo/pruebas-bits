@@ -1,0 +1,19 @@
+id,code,country_id:id,name
+l10n_py_country_state_1,1,base.py,CAPITAL
+l10n_py_country_state_2,2,base.py,CONCEPCION
+l10n_py_country_state_3,3,base.py,SAN PEDRO
+l10n_py_country_state_4,4,base.py,CORDILLERA
+l10n_py_country_state_5,5,base.py,GUAIRA
+l10n_py_country_state_6,6,base.py,CAAGUAZU
+l10n_py_country_state_7,7,base.py,CAAZAPA
+l10n_py_country_state_8,8,base.py,ITAPUA
+l10n_py_country_state_9,9,base.py,MISIONES
+l10n_py_country_state_10,10,base.py,PARAGUARI
+l10n_py_country_state_11,11,base.py,ALTO PARANA
+l10n_py_country_state_12,12,base.py,CENTRAL
+l10n_py_country_state_13,13,base.py,NEEMBUCU
+l10n_py_country_state_14,14,base.py,AMAMBAY
+l10n_py_country_state_15,15,base.py,PTE. HAYES
+l10n_py_country_state_16,16,base.py,BOQUERON
+l10n_py_country_state_17,17,base.py,ALTO PARAGUAY
+l10n_py_country_state_18,18,base.py,CANINDEYU

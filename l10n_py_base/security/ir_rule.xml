@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="model_l10n_py_card_rule" model="ir.rule">
+        <field name="name">Tarjetas en ordenes POS</field>
+        <field name="model_id" ref="model_l10n_py_card"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>    
+    <record id="model_py_establishment_rule" model="ir.rule">
+        <field name="name">Establecimientos (PY)</field>
+        <field name="model_id" ref="model_py_establishment"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>    
+    
+</odoo>

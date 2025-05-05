@@ -1,0 +1,8 @@
+id,code,description
+l10n_py_presence_indicator_1,1,Operación presencial
+l10n_py_presence_indicator_2,2,Operación electrónica
+l10n_py_presence_indicator_3,3,Operación telemarketing
+l10n_py_presence_indicator_4,4,Venta a domicilio
+l10n_py_presence_indicator_5,5,Operación bancaria
+l10n_py_presence_indicator_6,6,Operación cíclica
+l10n_py_presence_indicator_9,9,Otro

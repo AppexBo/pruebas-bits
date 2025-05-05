@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="custom_external_layout_invoice_py_roll">
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout" />
+                <t t-raw="0" />
+            </div>
+            <div class="footer">
+                <div style="font-size: 12px; text-align: right;">
+                    <ul class="list-inline">
+                        <li>
+                            <span class="page" />/
+                            <span class="topage" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+
+        <template id="l10n_py_invoice_document_roll">
+            <t t-call="l10n_py_operations.custom_external_layout_invoice_py_roll">
+                <head>
+                    <meta charset="UTF-8"/>
+                    <style>
+                        
+                    </style>    
+
+                </head>
+                <t t-set="doc" />
+                <!-- t-value="o.with_context(lang=o.partner_id.lang)" -->
+                <div class="page" style="font-size:17px; font-family: 'Times New Roman';">
+                    <div class="center" style="display: block; padding-top: 30px; ">
+                        <div>
+                            <b style="font-size: 23px;">
+                                
+                            </b>
+                        </div>
+                    </div>
+
+                    <table style="top:10px; width: 335px; font-size:17px; border: 1px solid white;">
+                        <tr><td style="text-align: center"> <b><t t-if="o.l10n_latam_document_type_id" >
+                                    <span t-field="o.l10n_latam_document_type_id.report_name" />
+                                </t>
+                                <t t-else="else" >
+                                    Factura electronica
+                                </t></b> </td></tr>
+                        <tr><td style="text-align: center"> RUC.: <span t-field="o.company_id.vat"/> </td></tr>
+                        <tr><td style="text-align: center"> <span t-field="o.company_id.name"/> </td></tr>
+                        <tr><td style="text-align: center"> Dirección: SENADOR LONG ENTRE LILO Y TENIENTE HECTOR VERA </td></tr>
+                        <tr><td style="text-align: center"> Telf.: (0981)493240 </td></tr>
+                        
+                        <tr><td style="text-align: center"> Timbrado: 17632684 </td></tr>
+                        <tr><td style="text-align: center"> Vigencia: 30/11/2025 </td></tr>
+                        <tr><td style="text-align: center"> Nro. Factura: <span t-field="o.l10n_latam_document_number"/> </td></tr>
+                        
+                    </table>
+                    <b>----------------------------------------------------------</b>
+                    <table style="width: 335px; font-size:16px; font-family: sans-serif; border: 1px solid white;">
+                        <t t-if="o.partner_id.l10n_latam_identification_type_id" >
+                            <tr>
+                                <td style="text-align: right; width: 167px;"> <b><span t-field="o.partner_id.l10n_latam_identification_type_id.name"/>:</b> </td>
+                                <t t-if="o.partner_id.l10n_latam_identification_type_id.code == '5'" >
+                                    
+                                    <td style="text-align: left; padding-left:10px;"> <span>00000000</span> </td>
+                                </t>
+                                <t t-else="else" >
+                                    <td style="text-align: left; padding-left:10px;"> <span t-field="o.partner_id.vat"/> </td>
+                                </t>
+                                
+                            </tr>
+                            
+                        </t>
+                        
+                        <tr>
+                            <td style="text-align: right; width: 167px;"> <b>RAZÓN SOCIAL:</b> </td>
+                            <td style="text-align: left; padding-left:10px;"> <span t-field="o.partner_id.name"/> </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 167px;"> <b>Dirección:</b> </td>
+                            <t t-if="o.partner_id.street" >
+                                <span t-field="o.partner_id.street"/>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 167px;"> <b>Teléfono:</b> </td>
+                            <t t-if="o.partner_id.phone" >
+                                <span t-field="o.partner_id.phone"/>
+                            </t>
+                        </tr>
+                    </table>
+                    
+                    <b>----------------------------------------------------------</b>
+
+
+                    <table style="width: 335px; font-size:14px; font-family: sans-serif; border: 1px solid white;">
+                        <tr style="text-align: center; font-size:15px;">
+                            <th colspan="2">DETALLE</th>
+                            <th/>
+                            
+                        </tr>
+                        <tbody>
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <t t-set="numeric_amount">
+                                            <t t-esc="line.get_E727()" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </t>
+                                        <t t-if="line.display_type == 'product'">                                
+                                            <tr> 
+                                                <td> <b t-esc="line.get_E701()"/> <b>-</b>  <b t-esc="line.get_E708()"/></td> 
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="width: 250px; text-align:right; padding-right:10px;">Unidad de Medida: <span t-esc="line.get_E710()"/> </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td><span t-esc="line.get_E711()"/> X <span t-esc="line.get_E721()" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/> </td>
+
+                                                <td style="text-align:right; padding-right:5px;"> <span t-esc="numeric_amount"/></td> 
+                                            </tr>     
+                                            <tr>
+                                                <td style="color: white;">.</td> 
+                                            </tr>     
+                                            
+                                            
+                                        </t>
+                                    </t>
+                        </tbody>
+                    </table>
+
+                    <b>----------------------------------------------------------</b>
+
+                    <table style="width: 335px; font-size:12px; font-family: sans-serif; border: 1px solid white;">
+                        <tr>
+                            <td style="width: 200px; text-align: right; padding-right:10px;"> <span>TOTAL</span> </td>
+                            <td style="text-align: right; padding-right:5px;"> <span t-esc="o.get_F005()" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/> </td>
+                        </tr>
+                        
+                    </table>
+                    
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem
+        id="l10n_py_invoice_root"
+        name="Facturación (PY)"
+        sequence="1"
+        parent="base.menu_administration"
+        />
+        <menuitem 
+            id="py_data_root"
+            name="Empresa"
+            parent="l10n_py_invoice_root"
+            sequence="1"
+            />
+            <menuitem 
+                id="expedition_point_menu"
+                name="Puntos de expedicion"
+                parent="py_data_root"
+                action="view_py_expedition_point_window"
+                sequence="1"
+            />
+            
+
+            
+</odoo>

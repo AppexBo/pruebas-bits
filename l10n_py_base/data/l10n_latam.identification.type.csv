@@ -1,0 +1,9 @@
+id,name,sequence,is_vat,code
+l10n_latam_base.it_vat,RUC,0,TRUE,
+l10n_latam_base.it_cex,Cédula paraguaya,10,,1
+l10n_latam_base.it_pass,Pasaporte,20,,2
+l10n_latam_base.it_fid,Cédula extranjera,30,,3
+l10n_latam_base.it_cres,Carnet residencia,40,,4
+l10n_latam_base.it_innom,Innominado,50,,5
+l10n_latam_base.it_tdef,Tarjeta Diplomática de exoneración fiscal,60,,6
+l10n_latam_base.it_other,Otro,90,,9

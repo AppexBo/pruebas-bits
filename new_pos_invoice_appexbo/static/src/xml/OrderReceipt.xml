@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="new_pos_invoice_appexbo" inherit_id="point_of_sale.template" xml:space="preserve">
+     <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
+            <div class="pos-receipt">
+                <div style="font-size:14px;width:75%;margin: auto;text-align:center;">
+                    <div> <strong>Bits &amp; Cream</strong></div>
+                </div>
+                <div style="font-size:10px;width:50%;margin: 2px auto;text-align:center;">
+                    <strong><t t-esc="props.data.name"/></strong>
+                </div>
+                <div class="pos-receipt-contact">
+                    <div style="font-size:10px;width:70%;margin: 2px auto;text-align:center;">
+                        <strong>Fecha:</strong> <t t-esc="props.data.date"/>
+                    </div>
+                </div>
+                <t t-if="props.data.partner">
+                    <div class="pos-receipt-client">
+                        <div style="font-size:10px;width:70%;margin: 2px auto;text-align:center;">
+                            <strong>Cliente:</strong> <t t-esc="props.data.partner.name"/>
+                            <t t-if="props.data.partner.l10n_latam_identification_type_id">
+                                <t t-if="props.data.partner.l10n_latam_identification_type_id[1] == 'RUC'">
+                                    <strong>, RUC:</strong> <t t-esc="props.data.partner.vat"/>    
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+                <!-- Líneas de Pedido -->
+                <table style="width:100%;text-align:left;" class="orderlines">
+                    <tr style="">
+                        <th style="font-size:10px;">Producto</th>
+                        <th style="font-size:10px;">P/U</th>
+                        <th style="font-size:10px;">Ctd</th>
+                        <th style="font-size:10px;">Subt</th>
+                    </tr>
+                    <t t-foreach="props.data.orderlines" t-as="line" t-key="line.id">
+                        <tr style="">
+                            
+                            <td style="font-size: 8px;">
+                                <strong><t t-esc="line.productName" /></strong>
+                                <t t-if="line.is_pack">
+                                    <t t-if="line.combo_products">
+                                        <t t-foreach="line.combo_products" t-as="products" t-key="products.id">
+                                            <t t-if="products">
+                                                <div class="product-name" style="font-size: 8px; font-weight: 500;">
+                                                   <strong>-</strong><t t-esc="products.display_name" /> [<t t-esc="products.combo_qty"/>]
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t>
+                            </td>
+                            <td style="font-size: 8px;">
+                                <s t-esc="line.oldUnitPrice" t-if="line.oldUnitPrice" />
+                                <t t-esc="line.unitPrice"/>
+                            </td>
+                            <td style="font-size: 8px;"><t t-esc="line.qty" /> </td>
+                            <td style="font-size: 8px;">
+                                <t t-esc="line.price" />
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+                <br/>
+                <table style="width:60%;text-align:left !important;margin-bottom:4px;" class="orderlines">
+                    <tr style="">
+                        <td style="">Total: <t t-esc="props.formatCurrency(props.data.amount_total)"/></td>
+                    </tr>
+                    <tr style="">
+                        <td style="">A Pagar: <t t-esc='props.formatCurrency(props.data.amount_total + props.data.rounding_applied)'/></td>
+                    </tr>
+                    <t t-if="props.data.total_discount">
+                        <tr style="">
+                            <td style="">Descuentos: <t t-esc="props.format_currency(props.data.total_discount)"/></td>
+                        </tr>
+                    </t>
+                </table>
+                <div class="before-footer"/>
+                <div t-if="props.data.footer" class="pos-receipt-center-align">
+                    <t t-out="props.data.footer"/>
+                </div>
+                <div style="text-align: center;">--------------------------------</div>
+                <div class="pos-receipt-order-data">
+                    <t t-if="props.data.cashier">
+                        <div class="cashier">
+                            <div>Atendido por <t t-esc="props.data.cashier"/></div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

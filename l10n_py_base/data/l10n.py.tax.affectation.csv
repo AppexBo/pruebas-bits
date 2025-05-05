@@ -1,0 +1,5 @@
+id,code,description
+l10n_py_tax_affectation_1,1,Gravado IVA
+l10n_py_tax_affectation_2,2,Exonerado (Art.83 - 125)
+l10n_py_tax_affectation_3,3,Exento
+l10n_py_tax_affectation_4,4,Gravado parcial

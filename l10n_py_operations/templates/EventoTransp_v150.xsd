@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+        elementFormDefault="qualified"
+        xmlns="http://ekuatia.set.gov.py/sifen/xsd"
+       	targetNamespace="http://ekuatia.set.gov.py/sifen/xsd">
+
+    <xs:include schemaLocation="Evento_Types_v150.xsd"/>
+    
+    <xs:complexType name="trGeDeVTr" >
+        <xs:annotation>
+	    	<xs:documentation>
+	    		Grupo de Datos que identifican al Evento por actualización de datos del transporte
+	    	</xs:documentation>
+	    </xs:annotation>
+	    <xs:sequence>
+	    	<xs:element name="Id" type="tId" minOccurs="0"/>
+	    	<xs:element name="dMotEv" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="cDepEnt" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dDesDepEnt" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="cDisEnt" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dDesDisEnt" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="cCiuEnt" type="tId" minOccurs="0"/>
+	    	<xs:element name="dDesCiuEnt" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dDirEnt" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dNumCas" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dCompDir1" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dNomChof" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dNumIDChof" type="tId" minOccurs="0"/>
+	    	<xs:element name="iNatTrans" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dRucTrans" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dDVTrans" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dNomTrans" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="iTipIDTrans" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dDTipIDTrans" type="tId" minOccurs="0"/>
+	    	<xs:element name="dNumIDTrans" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="iTipTrans" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dDesTipTrans" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="iModTrans" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dDesModTrans" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dTiVehTras" type="tId" minOccurs="0"/>
+	    	<xs:element name="dMarVeh" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dTipIdenVeh" type="tdNumTra" minOccurs="0"/>
+	    	<xs:element name="dNroIDVeh" type="fecHhmmss" minOccurs="0"/>
+	    	<xs:element name="dNroMatVeh" type="fecHhmmss" minOccurs="0"/>
+	    </xs:sequence>
+    </xs:complexType>
+                    
+    <xs:complexType name="tgGroupEvt">
+	    <xs:annotation>
+	    	<xs:documentation>
+	    		Grupo del evento
+	    	</xs:documentation>
+	    </xs:annotation>
+	    <xs:sequence>
+			<xs:element name="rGeDeVTr" type="trGeDeVTr"/>
+	    </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Cuerpo principal de Eventos -->
+    <!-- GDE002 -->
+    <xs:complexType name="trEve">
+        <xs:sequence>
+        	<xs:element name="dFecFirma" type="fecHhmmss"/>
+            <xs:element name="dVerFor" type="tVerFor"/>
+            <xs:element name="gGroupTiEvt" type="tgGroupEvt"/>
+        </xs:sequence>
+        <!--ID pasa a ser atributo del rEve-->
+        <xs:attribute name="Id" type="tdIdEve" use="required"/>
+    </xs:complexType>
+    
+    <!-- Cuerpo principal de Eventos Emisor-->
+    <!-- GDE001 -->
+    <xs:complexType name="trGesEve">
+        <xs:sequence>
+        	<xs:element name="rEve" type="trEve"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Elemento de entrada para los eventos -->
+    <!-- GDE000 -->
+    <xs:complexType name="tgGroupGesEve">
+    	<xs:sequence>
+    		<xs:element name="rGesEve" type="trGesEve" maxOccurs="15" />
+    	</xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

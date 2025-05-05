@@ -1,0 +1,8 @@
+id,code,description
+l10n_py_card_denomination_1,1,Visa
+l10n_py_card_denomination_2,2,Mastercard
+l10n_py_card_denomination_3,3,American Express
+l10n_py_card_denomination_4,4,Maestro
+l10n_py_card_denomination_5,5,Panal
+l10n_py_card_denomination_6,6,Cabal
+l10n_py_card_denomination_99,99,Otro

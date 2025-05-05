@@ -1,0 +1,14 @@
+id,code,description
+l10n_py_transaction_type_1,1,Venta de mercadería
+l10n_py_transaction_type_2,2,Prestación de servicios
+l10n_py_transaction_type_3,3,Mixto (Venta de mercadería y servicios)
+l10n_py_transaction_type_4,4,Venta de activo fijo
+l10n_py_transaction_type_5,5,Venta de divisas
+l10n_py_transaction_type_6,6,Compra de divisas
+l10n_py_transaction_type_7,7,Promoción o entrega de muestras
+l10n_py_transaction_type_8,8,Donación
+l10n_py_transaction_type_9,9,Anticipo
+l10n_py_transaction_type_10,10,Compra de productos
+l10n_py_transaction_type_11,11,Compra de servicios
+l10n_py_transaction_type_12,12,Venta de crédito fiscal
+l10n_py_transaction_type_13,13,Muestras médicas (Art. 3 RG 24/2014)

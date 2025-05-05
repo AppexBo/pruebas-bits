@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <!-- Form view for "model" -->
+        <record id="view_l10n_py_res_country_form" model="ir.ui.view">
+            <field name="name">view_l10n_py_res_country_form</field>
+            <field name="model">res.country</field>
+             <field name="inherit_id" ref="base.view_country_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="l10n_py_country_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

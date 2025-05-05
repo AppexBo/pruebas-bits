@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_py_establishment_window" model="ir.actions.act_window">
+            <field name="name">Centros de establecimiento</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">py.establishment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer centro de establecimiento
+                </p>
+            </field>
+        </record>
+
+        <record id="view_py_establishment_tree" model="ir.ui.view">
+            <field name="name">view_py_establishment_tree</field>
+            <field name="model">py.establishment</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_py_establishment_form" model="ir.ui.view">
+            <field name="name">view_py_establishment_form</field>
+            <field name="model">py.establishment</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>  
+                                <field name="name"/>
+                                
+                            </group>
+                            
+                            <group>
+                                <field name="code"/>
+                            </group>
+                            
+                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id="view_py_expedition_point_window" model="ir.actions.act_window">
+            <field name="name">Punto de expedicion</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">expedition.point</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer punto de expedicion
+                </p>
+            </field>
+        </record>
+
+        <record id="view_py_expedition_point_tree" model="ir.ui.view">
+            <field name="name">view_py_expedition_point_tree</field>
+            <field name="model">expedition.point</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="establishment_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_py_expedition_point_form" model="ir.ui.view">
+            <field name="name">view_py_expedition_point_form</field>
+            <field name="model">expedition.point</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>  
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="emision_type"/>
+                            </group>
+                            
+                            <group>
+                                <field name="establishment_id"/>
+                                <field name="company_id" readonly="1" invisible="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Secuencia de punto de expedición">
+                                <field name="expedition_point_sequence_ids">
+                                    <tree editable='bottom' >
+                                        <field name="name"/>
+                                        <field name="serial"/>
+                                        <field name="sequence"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

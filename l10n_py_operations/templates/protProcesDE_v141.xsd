@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="qualified" xmlns="http://ekuatia.set.gov.py/sifen/xsd" targetNamespace="http://ekuatia.set.gov.py/sifen/xsd">
+
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+    <xs:include schemaLocation="FE_Types_v141.xsd"/>
+
+    <xs:simpleType name="tdId">
+        <xs:annotation>
+            <xs:documentation>
+                Numero de protocolo de autorizacion precedido por el literar ID
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="12"/>
+            <xs:pattern value="ID[a-zA-Z0-9]{10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="tdProtAut">
+        <xs:annotation>
+            <xs:documentation>
+                Numero del protocolo de autorizacion
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="10"/>
+            <xs:pattern value="[1-9][0-9]{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--Grupo de resultado de procesamiento-->
+    <xs:complexType name="tgResProc">
+        <xs:annotation>
+            <xs:documentation>
+                Grupo de resultado de procesamiento
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dProtAut" type="tdProtAut"/>
+            <xs:element name="dCodRes">
+                <xs:annotation>
+                    <xs:documentation>
+                        Codigo de resultado de procesamiento
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]{4}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="dMsgRes">
+                <xs:annotation>
+                    <xs:documentation>
+                        Mensaje del resultado de procesamiento
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="255"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="dEstRes">
+                <xs:annotation>
+                    <xs:documentation>
+                        Estado del resultado
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="8"/>
+                        <xs:maxLength value="30"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--Identificador para firma electronica-->
+    <xs:complexType name="tgInfProt">
+        <xs:annotation>
+            <xs:documentation>
+                Grupo identificador para firma electronica
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dId" minOccurs="0" type="tdId"/>
+            <xs:element name="Id" type="tCDC"/>
+            <xs:element name="dFecProc" type="fecHhmmss"/>
+            <xs:element name="dProtAut" type="tdProtAut"/>
+            <xs:element name="dDigVal">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor hash del DE procesado
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="28"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="gResProc" type="tgResProc" maxOccurs="unbounded"/>
+            <xs:element ref="ds:Signature"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="rProtDe">
+        <xs:annotation>
+            <xs:documentation>
+                Respuesta del protocolo de procesamiento del DE
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Id" type="tCDC"/>
+            <xs:element name="dFecProc" type="fecHhmmss"/>
+            <xs:element name="dDigVal">
+                <xs:annotation>
+                    <xs:documentation>
+                        Valor hash del DE procesado
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="28"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="gResProc" type="tgResProc" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

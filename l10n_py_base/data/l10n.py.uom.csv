@@ -1,0 +1,35 @@
+"id","code","representation","description"
+l10n_py_001,87,m,Metros
+l10n_py_002,2366,CPM,Costo por Mil
+l10n_py_003,2329,UI,Unidad Internacional
+l10n_py_005,110,M3,Metros cúbicos
+l10n_py_006,77,UNI,Unidad
+l10n_py_007,86,g,Gramos
+l10n_py_008,89,LT,Litros
+l10n_py_009,90,MG,Miligramos
+l10n_py_010,91,CM,Centimetros
+l10n_py_011,92,CM2,Centimetros cuadrados
+l10n_py_012,93,CM3,Centimetros cubicos
+l10n_py_013,94,PUL,Pulgadas
+l10n_py_014,79,kg/m²,Kilogramos s/ metro cuadrado
+l10n_py_015,97,AA,Año
+l10n_py_016,98,ME,Mes
+l10n_py_017,98,ME,Mes
+l10n_py_018,99,TN,Tonelada
+l10n_py_019,100,Hs,Hora
+l10n_py_020,101,Mi,Minuto
+l10n_py_021,104,DET,Determinación
+l10n_py_022,103,Ya,Yardas
+l10n_py_023,108,MT,Metros
+l10n_py_024,109,M2,Metros cuadrados
+l10n_py_025,95,MM,Milímetros
+l10n_py_026,666,Se,Segundo
+l10n_py_027,102,Di,Día
+l10n_py_028,83,kg,Kilogramos
+l10n_py_029,88,ML,Mililitros
+l10n_py_030,625,Km,Kilómetros
+l10n_py_031,660,ml,Metro lineal
+l10n_py_032,885,GL,Unidad Medida Global
+l10n_py_033,891,pm,Por Milaje
+l10n_py_034,869,ha,Hectáreas
+l10n_py_035,569,ración,Ración

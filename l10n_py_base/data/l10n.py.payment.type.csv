@@ -1,0 +1,23 @@
+id,code,description
+l10n_py_payment_001,1,Efectivo
+l10n_py_payment_002,2,Cheque
+l10n_py_payment_003,3,Tarjeta de crédito
+l10n_py_payment_004,4,Tarjeta de débito
+l10n_py_payment_005,5,Transferencia
+l10n_py_payment_006,6,Giro
+l10n_py_payment_007,7,Billetera electrónica
+l10n_py_payment_008,8,Tarjeta empresarial
+l10n_py_payment_009,9,Vale
+l10n_py_payment_010,10,Retención
+l10n_py_payment_011,11,Pago por anticipo
+l10n_py_payment_012,12,Valor fiscal
+l10n_py_payment_013,13,Valor comercial
+l10n_py_payment_014,14,Compensación
+l10n_py_payment_015,15,Permuta
+l10n_py_payment_016,16,Pago bancario
+l10n_py_payment_017,17,Pago Móvil
+l10n_py_payment_018,18,Donación
+l10n_py_payment_019,19,Promoción
+l10n_py_payment_020,20,Consumo Interno
+l10n_py_payment_021,21,Pago Electrónico
+l10n_py_payment_022,99,Otro

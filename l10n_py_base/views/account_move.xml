@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Form view for "model" -->
+        <record id="view_l10n_py_base_account_move_form" model="ir.ui.view">
+            <field name="name">view_l10n_py_base_account_move_form</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="17" />
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="before">
+                    <!-- <field name="l10n_py_payment_type_id" invisible="1"/> -->
+                    <div colspan="2" invisible="move_type != 'out_invoice'" >
+                        <span class="oe_inline o_form_label mx-3" invisible="0"> Metodos de pago </span>
+                        <field name="l10n_py_payments_ids">
+                            
+                            <tree string="Metodos de pago" create="true" delete="true" edit="true" editable="bottom">
+                                
+                                <field name="l10n_py_payment_type_id" />
+                                <field name="amount" />
+                                <field name="currency_id" optional="hide" />
+                                <field name="card" optional="hide" />
+                                <field name="card_denomination_id" optional="hide" />
+                                
+                            </tree>
+                            
+                            
+                            
+                        </field>
+
+                        
+                        
+                    </div>
+
+
+                    <field name="establishment_id" required="move_type == 'out_invoice' and l10n_latam_use_documents" invisible="move_type != 'out_invoice'" />
+                    <field name="expedition_point_id" required="move_type == 'out_invoice' and l10n_latam_use_documents" invisible="move_type != 'out_invoice'"/>
+                    
+                    
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page name="page_edi" string="Factura (PY)" invisible="move_type != 'out_invoice'" readonly="state != 'draft'" >                            
+                        <group string="Datos adicionales" >
+                            <group>
+                                <field name="l10n_py_presence_indicator_id" required="move_type == 'out_invoice' and l10n_latam_use_documents"/>
+                                <field name="operation_condition"/>
+                                
+                                <field name="l10n_latam_document_number"/>
+                                <field name="invoice_number" readonly='1' />
+                                
+                                
+                            </group>
+                            <group>
+                                <field name="l10n_py_transaction_type_id"/>
+                                <field name="l10n_py_tax_affectation_type"/>
+                                
+                                
+                            </group>
+
+                            <group string="Respuesta">
+                                <field name="l10n_py_response" invisible="1" />
+                                <field name="l10n_py_response_Success"/>
+                                <field name="l10n_py_response_GlobalDocumentId"/>
+                                <field name="l10n_py_response_CountryDocumentId"/>
+                                <field name="l10n_py_response_Messages"/>
+                                <field name="l10n_py_response_ResponseValue"/>
+                                <field name="l10n_py_response_Code"/>
+                                <field name="l10n_py_response_Description"/>
+                                <field name="l10n_py_response_ErrorException"/>
+                                <field name="l10n_py_response_extra_info"/>
+                                
+                                <field name="l10n_py_transaction"/>
+                                
+                                
+                            </group>
+
+                            <group string="PY DATA">
+                                <field name="xml_str_format" invisible="1"/>
+                                <field name="py_file_content" invisible="1" />
+                                <field name="format_base64_xml"  invisible="1"/>
+                            </group>
+
+                            
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,1194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessagesTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	<MessageType>
+		<Type>
+			<Code>1</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=1])=1</XPathAssociation>
+		</Type>
+		<Name>Factura Electronica</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>1</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>2</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=2])=1</XPathAssociation>
+		</Type>
+		<Name>Factura electrónica de exportación</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>2</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>3</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=3])=1</XPathAssociation>
+		</Type>
+		<Name>Factura electrónica de importación</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>3</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>4</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=4])=1</XPathAssociation>
+		</Type>
+		<Name>Autofactura elctrónica</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>4</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>5</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=5])=1</XPathAssociation>
+		</Type>
+		<Name>Nota de crédito electrónica</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>1</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>6</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=6])=1</XPathAssociation>
+		</Type>
+		<Name>Nota de débito electrónica</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>6</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>7</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=7])=1</XPathAssociation>
+		</Type>
+		<Name>Nota de remisión electrónica</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>7</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>8</Code>
+			<XPathAssociation>count(//sig:DE/sig:gTimb[sig:iTiDE=8])=1</XPathAssociation>
+		</Type>
+		<Name>Comprobante de retención electrónico</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>DE_v150.xsd</Location>
+			<FileName>siRecepDE_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>iTiDE</PhysicalName>
+						<DefaultValue>8</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDTim/SET:dNumDoc</XPathValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dRucEm,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dDVEmi)</XPathValue>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>CONCAT(//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dRucRec,//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dDVRec)</XPathValue>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gEmis/SET:dNomEmi</XPathValue>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:gDatRec/SET:dNomRec</XPathValue>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gDatGralOpe/SET:dFeEmiDE</XPathValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTbasGraIVA,
+              //SET:rDE/SET:DE/SET:gTotSub/SET:dTBasGravISC)
+						</XPathValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>
+              SUM(//SET:rDE/SET:DE/SET:gTotSub/SET:dTotIVA,
+			  //SET:rDE/SET:DE/SET:gTotSub/SET:dLTotISC)
+						</XPathValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+						<XPathValue>//SET:rDE/SET:DE/SET:gTotSub/SET:dTotOpe</XPathValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">siRecepDE_v150_PDF.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">siRecepDE_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>C</Code>
+			<XPathAssociation>count(//sig:rGeVeCan)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Cancelación</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoCanc_v150.xsd</Location>
+			<FileName>RecEventoCanc_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>1</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoCanc_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoCanc_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>I</Code>
+			<XPathAssociation>count(//sig:rGeVeInu)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Inutiliazación</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoInut_v150.xsd</Location>
+			<FileName>RecEventoInut_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>2</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoInut_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoInut_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>T</Code>
+			<XPathAssociation>count(//sig:rGeDeVTr)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Datos del transportista</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoTransp_v150.xsd</Location>
+			<FileName>RecEventoTransp_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>4</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoTransp_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoTransp_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>NR</Code>
+			<XPathAssociation>count(//sig:rGeVeNotRec)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Notificación de recepción</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoNotRec_v150.xsd</Location>
+			<FileName>RecEventoNotRec_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>10</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoNotRec_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoNotRec_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>CO</Code>
+			<XPathAssociation>count(//sig:rGeVeConf)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Confirmación</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoConf_v150.xsd</Location>
+			<FileName>RecEventoConf_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>11</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoConf_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoConf_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>DI</Code>
+			<XPathAssociation>count(//sig:rGeVeDisconf)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Disconformidad</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoDisconf_v150.xsd</Location>
+			<FileName>RecEventoDisconf_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>12</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoDisconf_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoDisconf_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+	<MessageType>
+		<Type>
+			<Code>DE</Code>
+			<XPathAssociation>count(//sig:rGeVeDescon)=1</XPathAssociation>
+		</Type>
+		<Name>Evento de Desconocimiento</Name>
+		<Encoding>ISO-8859-1</Encoding>
+		<XmlSchema>
+			<NameSpace>http://ekuatia.set.gov.py/sifen/xsd</NameSpace>
+			<Prefix>SET</Prefix>
+			<Location>EventoDescon_v150.xsd</Location>
+			<FileName>RecEventoDescon_v150.xsd</FileName>
+		</XmlSchema>
+		<Persistance>
+			<Binders>
+				<Binder name="DocumentTable">
+					<PhysicalName>DocumentTable</PhysicalName>
+					<Field name="Type" type="System.Int32">
+						<PhysicalName>dTiGDE</PhysicalName>
+						<DefaultValue>13</DefaultValue>
+					</Field>
+					<Field name="Number" type="System.Int64">
+						<PhysicalName>docNumber</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="Sender" type="System.String">
+						<PhysicalName>docSender</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Receiver" type="System.String">
+						<PhysicalName>docReceiver</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="SenderName" type="System.String">
+						<PhysicalName>docSenderName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="ReceiverName" type="System.String">
+						<PhysicalName>docReceiverName</PhysicalName>
+						<DefaultValue/>
+					</Field>
+					<Field name="Date" type="System.DateTime">
+						<PhysicalName>docDate</PhysicalName>
+						<DefaultValue>01-01-1900</DefaultValue>
+					</Field>
+					<Field name="NetAmount" type="System.Decimal">
+						<PhysicalName>docNetAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TaxAmount" type="System.Decimal">
+						<PhysicalName>docTaxAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+					<Field name="TotalAmount" type="System.Decimal">
+						<PhysicalName>docAmount</PhysicalName>
+						<DefaultValue>0</DefaultValue>
+					</Field>
+				</Binder>
+			</Binders>
+		</Persistance>
+		<Properties>
+			<Property name="version" type="System.String">1.0</Property>
+			<Property name="XsdExportPdf" type="System.String">RecEventoDescon_v150.xsd</Property>
+			<Property name="XsdMappingTemplate" type="System.String">RecEventoDescon_v150.xsd</Property>
+			<Property name="VirtualPrinter" type="System.Boolean">true</Property>
+			<Property name="IncludePDF417" type="System.Boolean">false</Property>
+			<Property name="AllowPaging" type="System.Boolean">true</Property>
+			<Property name="AllowAutoNumbering" type="System.Boolean">true</Property>
+			<Property name="AllowAutoPrinting" type="System.Boolean">true</Property>
+			<Property name="AllowAutoSigning" type="System.Boolean">true</Property>
+		</Properties>
+	</MessageType>
+</MessagesTypes>

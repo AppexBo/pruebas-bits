@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('partner-details-box')]/div[5]" position="before">
+            <t>
+                <div class="partner-detail col">    
+                    <label class="form-label label" for="l10n_latam_identification_type_id">Tipo documento</label>
+                    <select class="detail form-select" name="l10n_latam_identification_type_id" t-model="changes.l10n_latam_identification_type_id" id="l10n_latam_identification_type_id">
+                        <option value="">None</option>
+                        <t t-foreach="pos.l10n_latam_identification_types" t-as="l10n_latam_identification_type" t-key="l10n_latam_identification_type.id">
+                            <option t-att-value="l10n_latam_identification_type.id">
+                                <t t-esc="l10n_latam_identification_type.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('partner-details-box')]/div[5]" position="after">
+            <t>
+                <div class="partner-detail col">    
+                    <label class="form-label label" for="operation_type_id">Tipo operacion cliente</label>
+                    <!-- <select class="detail form-select" name="operation_type_id" t-model="changes.operation_type_id" id="operation_type_id">
+                        <t t-foreach="pos.operation_types" t-as="operation_type" t-key="operation_type.id">
+                            <option t-att-value="operation_type.id" t-att-selected="props.partner.operation_type_id ? (operation_type.id === props.partner.operation_type_id[0] ? true : undefined) : operation_type.id === pos.default_operation_type_id ? true : undefined"> 
+                                <t t-esc="operation_type.name"/>
+                            </option>
+                        </t>
+                    </select> -->
+
+                    <select class="detail form-select" name="operation_type_id" t-model="changes.operation_type_id" id="operation_type_id">
+                        <option value="">None</option>
+                        <t t-foreach="pos.operation_types" t-as="operation_type" t-key="operation_type.id">
+                            <option t-att-value="operation_type.id" > 
+                                <t t-esc="operation_type.name"/>
+                            </option>
+                            <!-- t-att-selected="props.partner.operation_type_id ? (operation_type.id === props.partner.operation_type_id[0] ? true : undefined) : operation_type.id === pos.default_operation_type_id ? true : undefined" -->
+                        </t>
+                    </select>
+                </div>
+                <div class="partner-detail col">
+                    <label class="form-label label" for="receiver_nature">Naturaleza receptor</label>
+                    <!-- <select t-model="changes.receiver_nature" name="receiver_nature" id="receiver_nature">
+                        <option value="">None</option>
+                        <t t-foreach="receiverNatureOptions" t-as="option" t-key="option[0]">
+                            <option t-att-value="option[0]" t-esc="option[1]" t-att-selected="props.partner.receiver_nature ? (option[0] === props.partner.receiver_nature ? true : undefined) : (option[0] === '1' ? true : undefined)"/>
+                        </t>
+                    </select> -->
+                    <select t-model="changes.receiver_nature" name="receiver_nature"  id="receiver_nature">
+                        <option value="">None</option>
+                        <t t-foreach="receiverNatureOptions" t-as="option" t-key="option[0]">
+                            <option t-att-value="option[0]" t-esc="option[1]" />
+                        </t>
+                    </select>
+                    <!-- t-att-selected="props.partner.receiver_nature ? (option[0] === props.partner.receiver_nature ? true : undefined) : (option[0] === '1' ? true : undefined)" -->
+                </div>
+                
+                 <div class="partner-detail col">
+                    <label class="form-label label" for="taxpayer_type">Tipo contribuyente</label>
+                    <select t-model="changes.taxpayer_type" name="taxpayer_type" id="taxpayer_type">
+                        <option value="">None</option>
+                        <t t-foreach="taxpayer_type_options" t-as="option" t-key="option[0]">
+                            <option t-att-value="option[0]" t-esc="option[1]"/>
+                        </t>
+                    </select>
+                </div>
+
+                <div class="partner-detail col">    
+                    <label class="form-label label" for="distrit_id">Distrito</label>
+                    <select class="detail form-select" name="distrit_id" t-model="changes.distrit_id" id="distrit_id">
+                        <option value="">None</option>
+                        <t t-foreach="pos.city_ids" t-as="city_id" t-key="city_id.id">
+                            <option t-att-value="city_id.id">
+                                <t t-esc="city_id.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+
+                <div class="partner-detail col">    
+                    <label class="form-label label" for="locality_id">Localidad</label>
+                    <select class="detail form-select" name="locality_id" t-model="changes.locality_id" id="locality_id">
+                        <option value="">None</option>
+                        <t t-foreach="pos.locality_ids" t-as="locality_id" t-key="locality_id.id">
+                            <option t-att-value="locality_id.id">
+                                <t t-esc="locality_id.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+                <div class="partner-detail col">
+                    <span class="form-label label" for="house_number">Numero casa</span>
+                    <input  name="house_number" id="house_number" t-model="changes.house_number" class="detail house_number form-control" />
+                </div>                
+            </t>
+        </xpath>
+    </t>
+</templates>

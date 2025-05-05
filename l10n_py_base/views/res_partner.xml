@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="view_l10n_py_base_res_partner_account_form" model="ir.ui.view">
+            <field name="name">view_l10n_py_base_res_partner_account_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_edi_ubl_cii.view_partner_property_form" />
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='ubl_cii_format']" position="before">
+                    
+                    <field name="receiver_nature" />
+                    <field name="operation_type_id" />
+                    <field name="taxpayer_type" invisible="receiver_nature != '1'"  required="receiver_nature == '1'"/>
+                    
+                </xpath>
+
+                
+                <xpath expr="//field[@name='ubl_cii_format']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                
+            </field>
+        </record>
+    </data>
+</odoo>
