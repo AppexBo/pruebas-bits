@@ -25,8 +25,62 @@
 
                     <br/>
                     
+                    <!--
                     <t t-foreach="form" t-as="key">
                         <p><span t-esc="key"/>: <span t-esc="form[key]"/></p>
+                    </t>
+                    -->
+
+
+                    <t t-foreach="form['data']" t-as="product">
+                        <div class="product-section">
+                        
+                            <div class="row mb-2">
+                                <div class="col-3">
+                                    <strong>Saldo Inicial:</strong>
+                                    <span t-esc="product['opening_balance']"/>
+                                </div>
+                                <div class="col-3">
+                                    <strong>Total Entradas:</strong>
+                                    <span t-esc="product['total_in']"/>
+                                </div>
+                                <div class="col-3">
+                                    <strong>Total Salidas:</strong>
+                                    <span t-esc="product['total_out']"/>
+                                </div>
+                                <div class="col-3">
+                                    <strong>Saldo Final:</strong>
+                                    <span t-esc="product['balance']"/>
+                                </div>
+                            </div>
+
+                            <!-- 
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Tipo de Movimiento</th>
+                                        <th>Entrada</th>
+                                        <th>Salida</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <t t-foreach="form['data']['data'][product_index]['lst']" t-as="move">
+                                        <tr>
+                                            <td t-esc="move['date']"/>
+                                            <td t-esc="move['picking_type']"/>
+                                            <td t-esc="move['in']"/>
+                                            <td t-esc="move['out']"/>
+                                            <td t-esc="move['balance']"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            -->
+                        </div>
+                        <hr/>
                     </t>
                     
 
