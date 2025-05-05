@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extensión de la vista lista de transferencias -->
+    <record id="view_picking_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit.automatic_update_selected_stock_pickings</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <!-- Añadir botón al menú de acciones -->
+            <xpath expr="//header/button[@name='action_assign']" position="after">
+                <button name="update_selected_stock_pickings"
+                        string="Asignacion de Cantidades Automatica"
+                        type="object"
+                        class="btn-primary"
+                        groups="stock.group_stock_user"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
