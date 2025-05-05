@@ -120,14 +120,17 @@ class ReportMovementHistory(models.Model):
             balance = 0
             moves = all_moves.filtered(lambda r: r.product_id.id==product)
 
-            #if moves:
+            if moves:
                 # Cálculo del balance inicial (antes de date_start)
-            #    balance = sum(
-            #        -line.quantity if line.location_id.id == location else line.quantity
-            #        for line in moves
-            #        if line.date <= date_start
-            #    )
-            
+                balance = sum(
+                    -line.quantity if line.location_id.id == location else line.quantity
+                    for line in moves
+                    if line.date <= date_start
+                )
+            opening_balance = balance
+            moves = moves.filtered(lambda r: r.date >= date_start)
+
+
             yield {
                 'opening_balance': opening_balance,
                 'balance': balance,
