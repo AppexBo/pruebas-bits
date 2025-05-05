@@ -127,9 +127,32 @@ class ReportMovementHistory(models.Model):
                     for line in moves
                     if line.date <= date_start
                 )
-            opening_balance = balance
-            moves = moves.filtered(lambda r: r.date >= date_start)
+                opening_balance = balance
+                moves = moves.filtered(lambda r: r.date >= date_start)
 
+                for line in moves:
+                    temp_dict = {}
+                    
+                    if location == line.location_id.id:
+                        # Es una SALIDA (el producto sale de esta ubicación)
+                        temp_dict['out'] = line.quantity
+                        temp_dict['in'] = '--'
+                        balance -= line.quantity  # Restar del balance
+                        total_out += line.quantity
+                    else:
+                        # Es una ENTRADA (el producto entra a esta ubicación)
+                        temp_dict['in'] = line.quantity
+                        temp_dict['out'] = '--'
+                        balance += line.quantity  # Sumar al balance
+                        total_in += line.quantity
+                    
+                    # Agregar información adicional
+                    temp_dict['date'] = line.date
+                    temp_dict['picking_type'] = self.substitute(line.picking_code or '')  # Usar picking_code en lugar de picking_type_id.code
+                    temp_dict['balance'] = balance
+                    temp_dict['reference'] = line.reference or line.move_id.reference or line.picking_id.name or ''
+                    
+                    lst.append(temp_dict)
 
             yield {
                 'opening_balance': opening_balance,
