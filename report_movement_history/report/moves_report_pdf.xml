@@ -31,7 +31,6 @@
                     </t>
                     -->
 
-
                     <t t-foreach="form['data']" t-as="product">
                         <div class="product-section">
                         
@@ -69,7 +68,11 @@
                                     <t t-foreach="product['lst']" t-as="move">
                                         <tr>
                                             <td t-esc="move['date']"/>
-                                            <td t-esc="move['picking_type']"/>
+                                            <td>
+                                                <t t-if="move['picking_type'] == 'Outgoing'">Saliente</t>
+                                                <t t-elif="move['picking_type'] == 'Incoming'">Entrante</t>
+                                                <t t-else="" t-esc="move['picking_type']"/>
+                                            </td>
                                             <td t-esc="move['in']"/>
                                             <td t-esc="move['out']"/>
                                             <td t-esc="move['balance']"/>
