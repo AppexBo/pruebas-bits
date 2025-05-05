@@ -12,7 +12,13 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
+
                     <div class="row">
+                        <div class="col-4">
+                            <strong>Localización: </strong>
+                            <span t-esc="env['stock.location'].browse(form['location']).complete_name"/>
+                            
+                        </div>
                         <div class="col-4">
                             <strong>Fecha Inicio: </strong>
                             <span t-esc="form['start_date']"/>
@@ -24,12 +30,6 @@
                     </div>
 
                     <br/>
-                    
-                    <!--
-                    <t t-foreach="form" t-as="key">
-                        <p><span t-esc="key"/>: <span t-esc="form[key]"/></p>
-                    </t>
-                    -->
 
                     <t t-foreach="form['data']" t-as="product">
                         <div class="product-section">
@@ -68,7 +68,7 @@
 
                             <table class="table table-bordered">
                                 <thead>
-                                    <tr>
+                                    <tr style="color: black !important;">
                                         <th>Fecha</th>
                                         <th>Tipo de Movimiento</th>
                                         <th>Entrada</th>
