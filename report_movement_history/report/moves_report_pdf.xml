@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="moves_report_pdf" model="ir.actions.report">
+        <field name="name">Reporte de Historial de Movimiento</field>
+        <field name="model">report.movement.history</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">report_movement_history.report_moves_history</field>
+    </record>
+
+    <template id="report_moves_history">
+        <t t-set="company" t-value="env.company"/>
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Fecha Inicio: </strong>
+                            <span t-esc="form['start_date']"/>
+                        </div>
+                        <div class="col-4">
+                            <strong>Fecha Fin:</strong>
+                            <span t-esc="form['end_date']"/>
+                        </div>
+                    </div>
+
+                    <br/>
+                    
+                    <t t-foreach="form" t-as="key">
+                        <p><span t-esc="key"/>: <span t-esc="form[key]"/></p>
+                    </t>
+                    
+
+                </div>
+            </t>
+        </t>    
+    </template>
+</odoo>
