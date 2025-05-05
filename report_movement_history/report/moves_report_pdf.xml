@@ -38,7 +38,11 @@
                                 <div class="col-12">
                                     <strong>Producto:</strong>
                                     <t t-if="product['product_data']">
-                                        <span t-esc="env['product.product'].browse(product['product_data']).name"/>
+                                        <t t-set="val_product" t-value="env['product.product'].browse(product['product_data'])"/>
+                                        <t t-if="val_product.default_code">
+                                            [<span t-esc="val_product.default_code"/>]
+                                        </t>
+                                        <span t-esc="val_product.name"/>
                                     </t>
                                 </div>
                             </div>
