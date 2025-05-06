@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_report_pivot_view" model="ir.ui.view">
+        <field name="name">sale.report.pivot</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_pivot"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="secondary_qty" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_report_search_view" model="ir.ui.view">
+        <field name="name">sale.report.search</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="secondary_uom" groups="gt_secondary_uom.group_sale_secondary_uom"/>
+            </xpath>
+            <xpath expr="//filter[@name='Category']" position="after">
+                <filter name="secondary_uom" string="Secondary UOM" context="{'group_by':'secondary_uom'}" groups="gt_secondary_uom.group_sale_secondary_uom"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

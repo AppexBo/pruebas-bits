@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+    <record id="paper_report_account_account" model="report.paperformat" >
+            <field name="name">Formato de reporte contable</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">65</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">60</field>
+            <field name="dpi">90</field>
+    </record>
+    -->
+    
+    <data>    
+
+        <template id="layout_standard_customer_reports_account">
+            <t t-if="not o" t-set="o" t-value="doc" />
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id" />
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()" />
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company" />
+                </t>
+            </t>
+
+            <!-- HEADER -->
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+
+                
+                <table border="1" style="width:100%; font-size: 12px;" class="default">
+                    <tr>
+                        <td colspan="2">
+                            <strong style="color:white">.</strong>
+                        </td>
+
+                        <td style="width:33%;" class="text-right" colspan="2">
+                            <strong style="color:white">.</strong>
+                        </td>
+                        <td/>
+                        <td style="text-align: right; padding: 0;">
+                            Pagina: <span class="page"/> / <span class="topage"/>
+                        </td>
+                        
+                        
+                    </tr>
+                    <!--
+                    <tr>
+                        <td>
+                            <img t-if="company.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 60px;" alt="Logo"/>
+                        </td>
+                    </tr>
+                    -->
+
+                    <!--Para eiliminar bordes de la tabla-->
+                    <style type="text/css">
+                    table {
+                        border-spacing: 0px;
+                        border: 1px solid #fff;
+                    }
+                    </style>
+                    <tr>
+
+                        <td colspan="4"><strong t-field="company.name"/></td>
+                        
+                        <td colspan="2" style="font-size: 22px;"><strong t-field="o.journal_id.name"/></td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="4"><span t-field="company.street"/></td>
+                        <td>Nro.: </td>
+                        <td><span t-field="o.name"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4"><strong t-field="company.vat"/></td>
+                        <td>Gestión:</td>
+                        <td><span t-esc="o.date.year"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <!-- Comentar Numero en el reporte 
+                        <td colspan="4"><strong t-field="company.phone"/></td>-->
+                        <td colspan="4"><br/> <!--     SPACING        --></td>
+                        <td>Fecha:</td>
+                        <td>
+                            <span t-esc="o.date"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <!-- Comentar correo en el reporte 
+                        <td colspan="4"><strong t-field="company.email"/></td> -->
+                        <td colspan="4"><br/> <!--     SPACING        --></td>
+                        <td>Moneda:</td>
+                        <td class="text-left">
+                            <span t-esc="o.currency_id.name"/>
+                            T.C. <span t-esc="o.l10n_bo_exchange_rate or 0.0" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6"> <br/> <!-- SPACING --></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="5">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <strong>Razón social:</strong>
+                                        <span t-if="o.partner_id.name" t-field="o.partner_id.name"/>
+                                    </td>
+                                        
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Glosa: </strong>
+                                        <span t-if="o.journal_id.type == 'sale'" >
+                                            <span t-field="o.payment_reference" />
+                                            <span t-if="o.ref">
+                                                /
+                                            </span>
+                                            
+                                        </span>
+                                        
+                                        <span t-field="o.ref"/>
+
+                                        <span t-if="o.journal_id.type == 'purchase'" >
+                                            <span t-if="o.payment_reference" >
+                                                /
+                                                <span t-field="o.payment_reference" />
+                                            </span>
+                                            
+                                        </span>
+                                        
+                                    </td>
+                                </tr>        
+                            </table>    
+                        </td>
+                    </tr>
+                </table>
+                <!--
+                <span style="padding-right: 130px;" t-field="company.name"></span>
+
+                <div class="row">
+                    <div class="col-6" name="company_address">
+                        <span style="font-size: 12px" t-if="company.vat"><span style="font-size: 12px; "><b>NIT:</b></span> <span t-field="company.vat"/></span> <br/>
+                        <span style="font-size: 12px; padding-right: 130px;" t-if="company.email"><i style="font-size: 12px" class="fa fa-envelope"></i> <span t-field="company.email"/></span>
+                    </div>
+                    
+                </div>
+                -->
+            </div>
+            <!---->
+
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+              <t t-out="0"/>
+            </div>
+            
+
+        </template>
+    </data>
+</odoo>

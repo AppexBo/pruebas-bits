@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_inventory_secondary_uom" model="res.groups">
+        <field name="name">Secondary Unit On Inventory</field>
+    </record>
+    <record id="group_purchase_secondary_uom" model="res.groups">
+        <field name="name">Secondary Unit On Purchase</field>
+    </record>
+    <record id="group_sale_secondary_uom" model="res.groups">
+        <field name="name">Secondary Unit On Sale</field>
+    </record>
+    <record id="group_invoice_secondary_uom" model="res.groups">
+        <field name="name">Secondary Unit On Invoice</field>
+    </record>
+</odoo>

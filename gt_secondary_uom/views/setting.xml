@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_setting_form_gt" model="ir.ui.view">
+        <field name="name">res.config.settings.form.sh</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='product_general_settings']" position="after">
+                <h2>Secondary Units of Measure</h2>
+                <div class="row mt16 o_settings_container" id="secondary_uom_general_settings">
+                    <div class="col-12 col-lg-6 o_setting_box" id="secondary_purchase_invoice_uom_setting">
+                        <div class="o_setting_left_pane">
+                            <field name="group_purchase_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_purchase_sec_uom" string="Purchase Order"/>
+                            <div class="text-muted">
+                                Secondary UOM in Purchase Order
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="print_purchase_sec_uom"
+                                   invisible="not group_purchase_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                             <div class="text-muted" invisible="not group_purchase_sec_uom">Print Secondary UOM in Purchase Report</div>
+                        </div>
+                        <br/>
+                        <div class="o_setting_left_pane">
+                            <field name="group_invoice_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_invoice_sec_uom" string="Invoice"/>
+                            <div class="text-muted">
+                                Secondary UOM in Invoice
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="print_invoice_sec_uom" invisible="not group_invoice_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                             <div class="text-muted" invisible="not group_invoice_sec_uom">Print Secondary UOM in Invoice Report</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" id="secondary_sale_stock_uom_setting">
+                        <div class="o_setting_left_pane">
+                            <field name="group_sale_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_sale_sec_uom" string="Sale Order"/>
+                            <div class="text-muted">
+                                Secondary UOM in Sale Order
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="print_sale_sec_uom" invisible="not group_sale_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                             <div class="text-muted" invisible="not group_sale_sec_uom">Print Secondary UOM in Sale Report</div>
+                        </div>
+                        <br/>
+                        <div class="o_setting_left_pane">
+                            <field name="group_stock_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_stock_sec_uom" string="Stock"/>
+                            <div class="text-muted">
+                                Secondary UOM in Stock
+                            </div>
+                        </div>
+                        <div class="o_setting_left_pane">
+                            <field name="print_stock_sec_uom" invisible="not group_stock_sec_uom"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                             <div class="text-muted" invisible="not group_stock_sec_uom">Print Secondary UOM in Stock Report</div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
