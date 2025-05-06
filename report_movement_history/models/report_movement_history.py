@@ -183,25 +183,20 @@ class ReportMovementHistory(models.Model):
 
 
     def action_print_xlsx(self):
-        # Crear un archivo CSV vacío con solo los encabezados
+        # Crear un archivo CSV en memoria
         output = io.StringIO()
         writer = csv.writer(output)
         
-        # Escribir encabezados (puedes personalizarlos)
-        writer.writerow(["Columna1", "Columna2", "Columna3"])  # Columnas vacías
+        # Escribir encabezados
+        writer.writerow(["Columna1", "Columna2", "Columna3"])
         
-        # Preparar el archivo para descarga
-        file_data = base64.b64encode(output.getvalue().encode('utf-8'))
-        
-        # Actualizar el registro con el archivo generado
-        self.write({
-            'data_file': file_data,
-            'file_name': 'reporte.csv'
-        })
+        # Preparar el archivo para descarga directa
+        csv_content = output.getvalue()
+        csv_b64 = base64.b64encode(csv_content.encode('utf-8')).decode()
         
         return {
             'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=report.movement.history&id={}&field=data_file&filename_field=file_name&download=true'.format(self.id),
+            'url': f'data:text/csv;base64,{csv_b64}',
             'target': 'self',
             'download': 'reporte.csv',
         }
