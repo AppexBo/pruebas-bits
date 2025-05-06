@@ -131,8 +131,8 @@ class ReportMovementHistory(models.Model):
                 ), 2)
                 opening_balance = balance
                 moves = moves.filtered(lambda r: r.date >= date_start)
-                balance_actual_sin_modificar = balance
                 for line in moves:
+                    balance_actual_sin_modificar = balance
                     temp_dict = {}
                     
                     if location == line.location_id.id:
