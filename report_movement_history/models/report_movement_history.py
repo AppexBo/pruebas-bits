@@ -182,7 +182,7 @@ class ReportMovementHistory(models.Model):
             'start_date': self.start_date,
             'end_date': self.end_date,
             'location': self.location_id.id,
-            'product_ids': env['product.product'].search([('active', '=', True)]).mapped('id'),
+            'product_ids': self.env['product.product'].search([('active', '=', True)]).ids,
         }
 
         data.update(
