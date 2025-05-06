@@ -199,32 +199,6 @@ class ReportMovementHistory(models.Model):
             'Producto', 'Código', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
         ])
 
-        # Obtener productos para tener sus nombres
-        products = self.env['product.product'].browse(data['product_ids'])
-        
-        for product_data in data['data']:
-            product = products.filtered(lambda p: p.id == product_data['product_data']['id'])
-            
-            for move in product_data['lst']:
-                move_type = move['picking_type']
-                if move_type == 'Outgoing':
-                    move_type_str = 'Saliente'
-                elif move_type == 'Incoming':
-                    move_type_str = 'Entrante'
-                elif move_type == 'Internal':
-                    move_type_str = 'Traspaso'
-                else:
-                    move_type_str = move_type
-                
-                writer.writerow([
-                    product.name,
-                    product.default_code or '',
-                    move['date'],
-                    move_type_str,
-                    move['in'],
-                    move['out'],
-                    move['balance'],
-                ])
         
         # Preparar la respuesta para descargar el archivo
         output.seek(0)
