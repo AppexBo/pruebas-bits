@@ -200,6 +200,10 @@ class ReportMovementHistory(models.Model):
         ])
 
         for item in data['data']:
+            product_data = env['product.product'].browse(item['product_data'])
+            full_name = product_data.name
+            if product_data.default_code:
+                full_name = "[" + product_data.default_code + "] " + product_data.name
             if item['lst']: 
                 for move in item['lst']:
                     writer.writerow([
