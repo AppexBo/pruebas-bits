@@ -193,6 +193,7 @@ class ReportMovementHistory(models.Model):
                     data['product_ids']
             )
         )
+        _logger.info(data)
 
         # Escribir el encabezado
         writer.writerow([
@@ -200,7 +201,6 @@ class ReportMovementHistory(models.Model):
         ])
 
         for product in data:
-            _logger.info(product['data'])
             
             #
             #    writer.writerow([
