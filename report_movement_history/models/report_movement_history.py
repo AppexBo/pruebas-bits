@@ -182,7 +182,7 @@ class ReportMovementHistory(models.Model):
             'start_date': self.start_date,
             'end_date': self.end_date,
             'location': self.location_id.id,
-            'product_ids': self.product_ids.mapped('id'),
+            'product_ids': env['product.product'].search([('active', '=', True)]).mapped('id'),
         }
 
         data.update(
@@ -207,7 +207,7 @@ class ReportMovementHistory(models.Model):
             if item['lst']: 
                 for move in item['lst']:
                     writer.writerow([
-                        item['product_data'],
+                        full_name,
                         move['date'],
                         move['picking_type'],
                         move['reference'],
@@ -217,7 +217,7 @@ class ReportMovementHistory(models.Model):
                     ])
             else:
                 writer.writerow([
-                    item['product_data'], "-", "-", "-", "-", "-"
+                    full_name, "-", "-", "-", "-", "-"
                 ])  
 
 
