@@ -200,10 +200,8 @@ class ReportMovementHistory(models.Model):
         ])
 
         for product in data:
-            aux = str(product['start_date'])
-            writer.writerow([
-                aux
-            ])
+            _logger.info(product['data'])
+            
             #
             #    writer.writerow([
             #        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'
