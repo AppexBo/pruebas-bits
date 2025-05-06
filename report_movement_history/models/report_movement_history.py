@@ -196,7 +196,7 @@ class ReportMovementHistory(models.Model):
         
         # Escribir el encabezado
         writer.writerow([
-            'Producto', 'Código', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
+            'Producto', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
         ])
 
         for item in data['data']:
@@ -204,11 +204,15 @@ class ReportMovementHistory(models.Model):
                 for move in item['lst']:
                     writer.writerow([
                         item['product_data'],
-                        move['date']
+                        move['date'],
+                        move['picking_type'],
+                        move['in'],
+                        move['out'],
+                        move['balance'],
                     ])
             else:
                 writer.writerow([
-                    item['product_data'], item['lst']
+                    item['product_data'], "-", "-", "-", "-", "-"
                 ])  
 
 
