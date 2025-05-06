@@ -1,19 +1,11 @@
 import io
 import pytz
 import logging
-import base64
-import csv
-
 
 from odoo import fields, api, models
 from datetime import timedelta
 from odoo.exceptions import ValidationError
-from odoo.tools import date_utils
-
-try:
-    from odoo.tools.misc import xlsxwriter
-except ImportError:
-    import xlsxwriter
+from odoo.tools import pycompat
 
 _logger = logging.getLogger(__name__)
 
@@ -182,25 +174,39 @@ class ReportMovementHistory(models.Model):
         
 
 
-    def action_print_xlsx(self):
-        # Crear un archivo CSV en memoria
-        output = io.StringIO()
-        writer = csv.writer(output)
+    def action_print_csv(self):
+        # Crear el contenido del CSV
+        output = io.BytesIO()
+        writer = pycompat.csv_writer(output, quoting=1)
         
-        # Escribir encabezados
-        writer.writerow(["Columna1", "Columna2", "Columna3"])
+        # Escribir el encabezado
+        writer.writerow(["A"])
         
-        # Preparar el archivo para descarga directa
-        csv_content = output.getvalue()
-        csv_b64 = base64.b64encode(csv_content.encode('utf-8')).decode()
+        # Escribir los datos
+        writer.writerow(["1 hola"])
+        
+        # Preparar la respuesta para descargar el archivo
+        output.seek(0)
+        file_content = output.getvalue()
         
         return {
             'type': 'ir.actions.act_url',
-            'url': f'data:text/csv;base64,{csv_b64}',
+            'url': '/web/content/?model=ir.attachment&field=datas&filename_field=name&id=%s' % self._create_attachment(file_content).id,
             'target': 'self',
-            'download': 'reporte.csv',
         }
-        
+
+    def _create_attachment(self, file_content):
+        # Crear un attachment con el contenido del CSV
+        attachment = self.env['ir.attachment'].create({
+            'name': 'sssssss.csv',
+            'datas': fields.Binary.base64.encode(file_content),
+            'type': 'binary',
+            'res_model': self._name,
+            'res_id': self.id,
+            'mimetype': 'text/csv',
+        })
+        return attachment
+
 
     #def action_get_xlsx_report(self, data, response):
     
