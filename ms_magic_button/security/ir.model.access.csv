@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ms_magic_button_administration,ms_magic_button_administration,model_ms_magic_button,base.group_system,1,1,1,1
