@@ -203,6 +203,7 @@ class ReportMovementHistory(models.Model):
             'type': 'ir.actions.act_url',
             'url': '/web/content/?model=report.movement.history&id={}&field=data_file&filename_field=file_name&download=true'.format(self.id),
             'target': 'self',
+            'download': 'reporte.csv',
         }
 
     #def action_get_xlsx_report(self, data, response):
