@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="gt_sale_reports"  inherit_id="sale.report_saleorder_document">
+        <xpath expr="//table[hasclass('o_main_table')]" position="before">
+            <t t-set="display_sec_uom" t-value="any(l.product_id.is_secondary_unit for l in lines_to_report)"/>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]/thead/tr/th[@name='th_quantity']" position="after">
+            <th t-if="doc.company_id.group_sale_sec_uom and doc.company_id.print_sale_sec_uom and display_sec_uom" name="th_secondary_uom_qty" class="text-end">Secondary Quantity</th>
+        </xpath>
+        <xpath expr="//td[@name='td_quantity']" position="after">
+            <td t-if="line.company_id.group_sale_sec_uom and line.company_id.print_sale_sec_uom and display_sec_uom" name="td_secondary_uom_qty" class="text-end">
+                <span t-field="line.secondary_qty"/>
+                <span t-field="line.secondary_uom"/>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>

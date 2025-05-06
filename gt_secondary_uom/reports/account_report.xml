@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="gt_account_report" inherit_id="account.report_invoice_document">
+        <xpath expr="//table[@name='invoice_line_table']" position="before">
+            <t t-set="display_sec_uom" t-value="any(l.product_id.is_secondary_unit for l in o.invoice_line_ids)"/>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]/thead/tr/th[@name='th_quantity']" position="after">
+             <th t-if="o.company_id.group_invoice_sec_uom and o.company_id.print_invoice_sec_uom and display_sec_uom" name="th_secondary_uom_qty" class="text-end"><span>Secondary Quantity</span></th>
+        </xpath>
+        <xpath expr="//tbody//tr/t[@name='account_invoice_line_accountable']/td[2]" position="after">
+             <td t-if="o.company_id.group_invoice_sec_uom and o.company_id.print_invoice_sec_uom and display_sec_uom" class="text-end">
+                <span t-field="line.secondary_qty"/>
+                <span t-field="line.secondary_uom"/>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>

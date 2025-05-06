@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_invoice_report_pivot" model="ir.ui.view">
+        <field name="name">account.invoice.report.pivot</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_pivot"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_categ_id']" position="after">
+                <field name="secondary_qty" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_invoice_report_search" model="ir.ui.view">
+        <field name="name">account.invoice.report.search</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="secondary_uom" groups="gt_secondary_uom.group_invoice_secondary_uom"/>
+            </xpath>
+            <xpath expr="//filter[@name='partner_id']" position="after">
+                <filter name="secondary_uom" string="Secondary UOM" context="{'group_by':'secondary_uom'}" groups="gt_secondary_uom.group_invoice_secondary_uom"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="l10n_account_account">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report_new_17.layout_standard_customer_reports_account">
+                    <div class="page" style="margin-top: 0px;">
+                       
+                        <div class="row">
+                         <!--
+                            <div class="col-3">
+                                <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                                     style="max-height: 60px;" alt="Logo"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            <span t-esc="o.company_id.name"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            <span t-esc="o.company_id.street"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            <span t-esc="o.company_id.vat"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            <span t-esc="o.company_id.phone"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            <span t-esc="o.company_id.email"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            Razón social:
+                                            <span t-esc="o.partner_id.name"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-left p-0">
+                                            Glosa:
+                                            <div t-if="o.journal_id.type == 'sale'">
+                                                <span t-esc="o.ref"/>
+                                            </div>
+                                            <div t-if="o.journal_id.type == 'purchase'">
+                                                <span t-esc="o.journal_id.name"/>,
+                                                Nro.
+                                                <span t-esc="o.ref"/>
+                                            </div>
+                                            <div t-if="o.journal_id.type == 'cash'">
+                                                <span t-esc="o.ref"/>
+                                            </div>
+                                            <div t-if="o.journal_id.type == 'bank'">
+                                                <span t-esc="o.ref"/>
+                                            </div>
+                                            <div t-if="o.journal_id.type == 'general'">
+                                                <span t-esc="o.ref"/>
+                                            </div>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h3 class="text-right p-0">
+                                            COMPROBANTE DE EGRESOS
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-right p-0">
+                                            Nro.
+                                            <span t-esc="o.name"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-right p-0">
+                                            Gestión
+                                            <span t-esc="o.date.year"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-right p-0">
+                                            Fecha
+                                            <span t-esc="o.date"/>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-4">
+                                        <h6 class="text-right p-0">
+                                            Moneda:
+                                            <span>
+                                                <t t-esc="o.currency_id.name"/>
+                                            </span>
+                                        </h6>
+                                    </div>
+                                    <div class="col-3">
+                                        <h6 class="text-right p-0">
+                                            T.C.
+                                            <span>
+                                                <t t-esc="o.l10n_bo_exchange_rate or 0.0"
+                                                   t-options='{"widget": "float", "precision": 2}'/>
+                                            </span>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                        <!--Para eiliminar bordes de la tabla-->
+                        <style type="text/css">
+                            thead, tbody, th, tr, td {
+                                border: 2px solid #dee2e6;
+                            }
+                        </style>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered mt32" style="width:100%;  border-top: 0px; font-size: 11px; margin-top: 10px;">
+                                    <thead>
+                                        <tr style="background-color: #E5E8E8">
+                                            <th class="p-0 text-center">
+                                                <strong>
+                                                    CUENTA
+                                                </strong>
+                                            </th>
+                                            <th class="p-0 text-center">
+                                                <strong>
+                                                    NOMBRE
+                                                </strong>
+                                            </th>
+                                            <!--                                            <th class="p-0 text-center" width="70">-->
+                                            <!--                                                <strong>-->
+                                            <!--                                                    DEBE $US-->
+                                            <!--                                                </strong>-->
+                                            <!--                                            </th>-->
+                                            <!--                                            <th class="p-0 text-lecenterft" width="80">-->
+                                            <!--                                                <strong>-->
+                                            <!--                                                    HABER $US-->
+                                            <!--                                                </strong>-->
+                                            <!--                                            </th>-->
+                                            <th class="p-0 text-center" width="120">
+                                                <strong>
+                                                    EMPRESA
+                                                </strong>
+                                            </th>
+                                            <th class="p-0 text-center" width="90">
+                                                <strong>
+                                                    CTA ANALITICA
+                                                </strong>
+                                            </th>
+                                            <th class="p-0 text-center" width="90">
+                                                <strong>
+                                                    DEBE BS
+                                                </strong>
+                                            </th>
+                                            <th class="p-0 text-center" width="90">
+                                                <strong>
+                                                    HABER BS
+                                                </strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <t t-set="format_decimal" t-value="o.currency_id and o.currency_id.decimal_places or 2"/>
+                                    <tbody class="account_account_tbody">
+                                        <t t-set="sum_debit_dollar" t-value="0.0"/>
+                                        <t t-set="sum_credit_dollar" t-value="0.0"/>
+                                        <t t-set="sum_debit_bob" t-value="0.0"/>
+                                        <t t-set="sum_credit_bob" t-value="0.0"/>
+                                        <t t-foreach="o.line_ids" t-as="line">
+                                            <t t-set="sum_debit_dollar" t-value="sum_debit_dollar + line.debit"/>
+                                            <t t-set="sum_credit_dollar" t-value="sum_credit_dollar + line.credit"/>
+                                            <t t-set="sum_debit_bob" t-value="sum_debit_bob + line.debit"/>
+                                            <t t-set="sum_credit_bob" t-value="sum_credit_bob + line.credit"/>
+                                            <tr>
+                                                <td class="text-left p-0">
+                                                    <span t-esc="line.account_id.code"/>
+                                                </td>
+                                                <td class="text-left p-0" style="height: 40px !important;">
+                                                    <span t-esc="line.account_id.name"/>
+                                                    <br/>
+                                                    <span t-esc="line.name or ''"/>
+                                                </td>
+                                                <td class="text-left p-0"  style="height: 40px !important;">
+                                                    <span t-esc="line.partner_id.name"/>
+                                                </td>
+                                                <!--                                                <td class="text-right p-0">-->
+                                                <!--                                                    <span t-esc="line.debit * o.l10n_bo_exchange_rate" t-options='{"widget": "float", "precision": 2}'/>-->
+                                                <!--                                                </td>-->
+                                                <!--                                                <td class="text-right p-0">-->
+                                                <!--                                                    <span t-esc="line.credit * o.l10n_bo_exchange_rate" t-options='{"widget": "float", "precision": 2}'/>-->
+                                                <!--                                                </td>-->
+                                                <td class="text-right p-0">
+                                                    <span t-esc="line.analytic_account_id.name"/>
+                                                </td>
+                                                <td style="text-align: right; padding: 0;">
+                                                    <span t-esc="line.debit" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </td>
+                                                <td style="text-align: right; padding: 0;">
+                                                    <span t-esc="line.credit" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr style="border: 1px solid !important;">
+                                            <td colspan="4" style="text-align: right; padding: 0;"><strong>TOTALES:</strong> </td>
+
+                                            <!--                                            <td class="text-right p-0">-->
+                                            <!--                                                <strong>-->
+                                            <!--                                                    <t t-set="sum_debit_dollar"-->
+                                            <!--                                                       t-value="sum_debit_dollar * o.l10n_bo_exchange_rate"/>-->
+                                            <!--                                                    <t t-out="sum_debit_dollar" t-options='{"widget": "float", "precision": 2}'/>-->
+                                            <!--                                                </strong>-->
+                                            <!--                                            </td>-->
+                                            <!--                                            <td class="text-right p-0">-->
+                                            <!--                                                <strong>-->
+                                            <!--                                                    <t t-set="sum_credit_dollar"-->
+                                            <!--                                                       t-value="sum_credit_dollar * o.l10n_bo_exchange_rate"/>-->
+                                            <!--                                                    <t t-out="sum_credit_dollar" t-options='{"widget": "float", "precision": 2}'/>-->
+                                            <!--                                                </strong>-->
+                                            <!--                                            </td>-->
+                                            <td style="text-align: right; padding: 0;">
+                                                <strong>
+                                                    <t t-out="sum_debit_bob" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </strong>
+                                            </td>
+                                            <td style="text-align: right; padding: 0;">
+                                                <strong>
+                                                    <t t-out="sum_credit_bob" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-12">
+                                <t t-set="num2word_var" t-value="o.number_to_word(o.amount_total)"/>
+                                <span style="font-size:12px;" >La suma de:
+                                    <t t-out="num2word_var"/>
+                                </span>
+                            </div>
+                        </div>
+                        <t t-set="current_page" t-value="context.get('page_number', 1)"/>
+                        <t t-set="total_pages" t-value="len(o)"/>
+                        <div class="clearfix" t-if="current_page == total_pages" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+                            <div id="total" class="row">
+                                <table class="table table-bordered mt32" style="font-size: 12px;">
+                                    <tr>
+                                        <td style="height: 100px; width: 25%; border-top: 0px"/>
+                                        <td style="height: 100px; width: 25%; border-top: 0px"/>
+                                        <td style="height: 100px; width: 25%; border-top: 0px"/>
+                                        <td style="height: 100px; width: 25%; border-top: 0px"/>
+                                    </tr>
+                                    <tr>
+                                        <td/>
+                                        <td>Autorizado por</td>
+                                        <td>Aprobado por G.G.</td>
+                                        <td>C.I. ...................</td>
+                                    </tr>
+                                </table>
+                                
+                            </div>
+                            <span style="border-top: 0px !important;">
+                                        <small class="text-left p-0">
+                                            <span><strong>Registrado por</strong></span>
+                                            <span t-esc="o.create_uid.name"/>
+                                            <span><strong>, fecha:</strong></span>
+                                            <span t-esc="(o.date).isoformat()"/>
+                                            <!--
+                                                <span t-esc="context_timestamp(o.create_date).strftime('%d-%m-%Y %H:%M')"/>
+                                            -->
+                                            <span style="padding-left: 10px;"><strong>Impreso por</strong></span>
+                                            <span t-esc="o.env.user.name"/>
+                                            <!--
+                                            <span><strong>, fecha:</strong></span>
+                                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                                            -->
+                                        </small>
+                                </span>  
+                        </div>
+                            
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+
+    <record id="action_account_account_report" model="ir.actions.report">
+        <field name="name">Apuntes contables</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">report_new_17.l10n_account_account</field>
+        <field name="report_file">report_new_17.l10n_account_account</field>
+        <field name="print_report_name">'Libro Diario - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="report_new_17.paper_report_account_account"/>
+        <field name="binding_model_id" ref="model_account_move"/>
+    </record>
+</odoo>
