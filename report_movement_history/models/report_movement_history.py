@@ -1,10 +1,16 @@
-from datetime import timedelta
+import io
 import pytz
+import logging
 
 from odoo import fields, api, models
+from datetime import timedelta
+from odoo.exceptions import ValidationError
 
+try:
+    from odoo.tools.misc import xlsxwriter
+except ImportError:
+    import xlsxwriter
 
-import logging
 _logger = logging.getLogger(__name__)
 
 class ReportMovementHistory(models.Model):
@@ -69,6 +75,68 @@ class ReportMovementHistory(models.Model):
         
         return data
 
+    def action_print_xlsx(self):
+        if self.start_date > self.end_date:
+            raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
+        
+        data = {
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'location': self.location_id.id,
+            'product_ids': self.product_ids.mapped('id'),
+        }
+
+        data.update(
+            self.get_sale_details(
+                    data['start_date'], 
+                    data['end_date'], 
+                    data['location'], 
+                    data['product_ids']
+            )
+        )
+
+        # Crear el archivo Excel en memoria
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        sheet = workbook.add_worksheet()
+
+        # Configuración de formato
+        sheet.set_paper(9)
+        sheet.set_default_row(18)
+        sheet.set_column('C:D', 12)
+        sheet.set_column('E:E', 25)
+        sheet.set_column('G:H', 12)
+
+        # Formatos
+        cell_format = workbook.add_format({'font_size': '12px'})
+        cell_format_red = workbook.add_format(
+            {'font_color': 'red', 'align': 'center', 'bold': True})
+        format1 = workbook.add_format({'font_size': '10px', 'align': 'left'})
+        head = workbook.add_format(
+            {'align': 'center', 'bold': True, 'font_size': '15px'})
+        txt = workbook.add_format({'font_size': '12px'})
+        total = workbook.add_format({'align': 'right', 'font_size': '10px'})
+        
+        # Escribir contenido
+        sheet.merge_range('B2:I3', 'ADVANCED SCRAP REPORT', head)
+        sheet.write('B6', 'From:', cell_format)
+        sheet.write('C6', data['start_date'], txt)
+        sheet.write('D6', 'To:', cell_format)
+        sheet.write('E6', data['end_date'], txt)
+
+        # Preparar y retornar la respuesta para descargar el archivo
+        xlsx_data = output.getvalue()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=%s&id=%s&field=xlsx_file&filename_field=filename&download=true' % (
+                self._name, self.id),
+            'target': 'self',
+            'data': {
+                'xlsx_file': base64.b64encode(xlsx_data),
+                'filename': 'reporte_ventas.xlsx'
+            }
+        }
+
 
     @api.model
     def get_sale_details(self, start_date=False, end_date=False, location=False, products=False):
@@ -122,11 +190,11 @@ class ReportMovementHistory(models.Model):
 
             if moves:
                 # Cálculo del balance inicial (antes de date_start)
-                balance = sum(
+                balance = round(sum(
                     -line.quantity if line.location_id.id == location else line.quantity
                     for line in moves
                     if line.date <= date_start
-                )
+                ), 2)
                 opening_balance = balance
                 moves = moves.filtered(lambda r: r.date >= date_start)
 
@@ -166,3 +234,15 @@ class ReportMovementHistory(models.Model):
     @staticmethod
     def substitute(code):
         return code.replace('_', " ").title() if code else code
+
+
+        
+        
+        
+
+
+
+
+
+    #def action_get_xlsx_report(self, data, response):
+    

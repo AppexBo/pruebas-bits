@@ -83,6 +83,7 @@
                                             <td>
                                                 <t t-if="move['picking_type'] == 'Outgoing'">Saliente</t>
                                                 <t t-elif="move['picking_type'] == 'Incoming'">Entrante</t>
+                                                <t t-elif="move['picking_type'] == 'Internal'">Traspaso</t>
                                                 <t t-else="" t-esc="move['picking_type']"/>
                                             </td>
                                             <td t-esc="move['in']"/>
