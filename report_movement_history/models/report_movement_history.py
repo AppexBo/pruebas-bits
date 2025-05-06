@@ -6,6 +6,7 @@ import json
 from odoo import fields, api, models
 from datetime import timedelta
 from odoo.exceptions import ValidationError
+from odoo.tools import date_utils
 
 try:
     from odoo.tools.misc import xlsxwriter
@@ -242,8 +243,7 @@ class ReportMovementHistory(models.Model):
         return {
             'type': 'ir.actions.report',
             'data': {'model': 'scrap.move.report',
-                     'options': json.dumps(data,
-                                           default=date_utils.json_default),
+                     'options': json.dumps(data, default=date_utils.json_default),
                      'output_format': 'xlsx',
                      'report_name': 'Scrap Move Excel Report',
                      },
