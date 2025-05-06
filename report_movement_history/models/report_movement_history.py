@@ -187,7 +187,7 @@ class ReportMovementHistory(models.Model):
             'start_date': self.start_date,
             'end_date': self.end_date,
             'location': self.location_id.id,
-            'product': self.product_id.id
+            'product': self.product_ids.mapped('id')[0],
         }
         query = """SELECT s.name as reference,t.name as product_name,p.id as 
                 tmpl_id, scrap_qty,l.name as complete_name,s.create_date,
