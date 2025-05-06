@@ -199,7 +199,12 @@ class ReportMovementHistory(models.Model):
             'Producto', 'Código', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
         ])
 
-        
+        for product in data
+            for line in product['lst']:
+                writer.writerow([
+                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'
+                ])
+
         # Preparar la respuesta para descargar el archivo
         output.seek(0)
         file_content = output.getvalue()
