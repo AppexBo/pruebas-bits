@@ -203,11 +203,7 @@ class ReportMovementHistory(models.Model):
             if item['lst']: 
                 writer.writerow([
                     item['product_data'],
-                    item['lst']['date'],
-                    item['lst']['picking_type'],
-                    item['lst']['in'],
-                    item['lst']['out'],
-                    item['lst']['balance'],
+                    item['lst']
                 ])
             else:
                 writer.writerow([
