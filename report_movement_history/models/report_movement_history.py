@@ -200,6 +200,7 @@ class ReportMovementHistory(models.Model):
             'target': 'self',
             'download': 'reporte.csv',
         }
+        
 
     #def action_get_xlsx_report(self, data, response):
     
