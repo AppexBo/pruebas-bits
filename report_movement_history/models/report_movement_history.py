@@ -189,11 +189,14 @@ class ReportMovementHistory(models.Model):
                 <!-- Contenido del reporte XML -->
             </report>
         """
+
+        # Codificar el contenido XML a base64
+        xml_content_base64 = base64.b64encode(xml_content.encode('utf-8'))
         
         # Crear un registro de ir.attachment con el XML
         attachment = self.env['ir.attachment'].create({
             'name': 'reporte.xml',
-            'datas': xml_content.encode('base64'),
+            'datas': xml_content_base64,
             'res_model': self._name,
             'res_id': self.id,
             'mimetype': 'application/xml'
