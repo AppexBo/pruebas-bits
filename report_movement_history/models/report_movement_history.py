@@ -131,7 +131,7 @@ class ReportMovementHistory(models.Model):
                 ), 2)
                 opening_balance = balance
                 moves = moves.filtered(lambda r: r.date >= date_start)
-
+                balance_actual_sin_modificar = balance
                 for line in moves:
                     temp_dict = {}
                     
@@ -153,7 +153,8 @@ class ReportMovementHistory(models.Model):
                     temp_dict['picking_type'] = self.substitute(line.picking_code or '')  # Usar picking_code en lugar de picking_type_id.code
                     temp_dict['balance'] = balance
                     temp_dict['reference'] = line.reference or line.move_id.reference or line.picking_id.name or ''
-                    
+                    temp_dict['balance_actual_sin_modificar'] = balance_actual_sin_modificar
+
                     lst.append(temp_dict)
 
             yield {
@@ -196,7 +197,7 @@ class ReportMovementHistory(models.Model):
         
         # Escribir el encabezado
         writer.writerow([
-            'Producto', 'Fecha', 'Tipo Movimiento', 'Referencia', 'Entrada', 'Salida', 'Saldo'
+            'Producto', 'Fecha', 'Tipo Movimiento', 'Referencia', 'Saldo anterior', 'Entrada', 'Salida', 'Saldo'
         ])
 
         for item in data['data']:
@@ -211,13 +212,14 @@ class ReportMovementHistory(models.Model):
                         move['date'],
                         move['picking_type'],
                         move['reference'],
+                        move['balance_actual_sin_modificar'],
                         move['in'],
                         move['out'],
                         move['balance'],
                     ])
             else:
                 writer.writerow([
-                    full_name, "-", "-", "-", "-", "-"
+                    full_name, "-", "-", "-", "-", "-", "-"
                 ])  
 
 
