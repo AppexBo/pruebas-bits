@@ -207,7 +207,7 @@ class ReportMovementHistory(models.Model):
                 full_name = "[" + product_data.default_code + "] " + product_data.name
             if item['lst']: 
                 for move in item['lst']:
-                    valor = move['in'] - move['out']
+                    valor = str(move['in'] - move['out'])
                     writer.writerow([
                         full_name,
                         move['date'],
