@@ -193,18 +193,18 @@ class ReportMovementHistory(models.Model):
                     data['product_ids']
             )
         )
-        _logger.info(data)
-
+        
         # Escribir el encabezado
         writer.writerow([
             'Producto', 'Código', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
         ])
 
-        #for product in data:   
-            #
-            #    writer.writerow([
-            #        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'
-            #    ])
+        for item in data['data']:
+            _logger.info(item['product_data'])  
+            writer.writerow([
+                item['product_data']
+            ])  
+
 
         # Preparar la respuesta para descargar el archivo
         output.seek(0)
