@@ -181,32 +181,26 @@ class ReportMovementHistory(models.Model):
 
 
     def action_print_xlsx(self):
-        # Aquí iría la lógica para generar el XML
-        # Este es solo un ejemplo básico
-        xml_content = """
-        <?xml version="1.0"?>
-            <report>
-                <!-- Contenido del reporte XML -->
-            </report>
-        """
-
-        # Codificar el contenido XML a base64
-        xml_content_base64 = base64.b64encode(xml_content.encode('utf-8'))
+        # Crear un archivo CSV vacío con solo los encabezados
+        output = io.StringIO()
+        writer = csv.writer(output)
         
-        # Crear un registro de ir.attachment con el XML
-        attachment = self.env['ir.attachment'].create({
-            'name': 'reporte.xml',
-            'datas': xml_content_base64,
-            'res_model': self._name,
-            'res_id': self.id,
-            'mimetype': 'application/xml'
+        # Escribir encabezados (puedes personalizarlos)
+        writer.writerow(["Columna1", "Columna2", "Columna3"])  # Columnas vacías
+        
+        # Preparar el archivo para descarga
+        file_data = base64.b64encode(output.getvalue().encode('utf-8'))
+        
+        # Actualizar el registro con el archivo generado
+        self.write({
+            'data_file': file_data,
+            'file_name': 'reporte.csv'
         })
         
-        # Retornar una acción para descargar el archivo
         return {
             'type': 'ir.actions.act_url',
-            'url': '/web/content/%s?download=true' % attachment.id,
-            'target': 'new',
+            'url': '/web/content/?model=report.movement.history&id={}&field=data_file&filename_field=file_name&download=true'.format(self.id),
+            'target': 'self',
         }
 
     #def action_get_xlsx_report(self, data, response):
