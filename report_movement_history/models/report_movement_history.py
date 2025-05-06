@@ -1,7 +1,7 @@
 import io
 import pytz
 import logging
-import json
+import base64
 
 from odoo import fields, api, models
 from datetime import timedelta
