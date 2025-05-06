@@ -199,7 +199,7 @@ class ReportMovementHistory(models.Model):
             'Producto', 'Código', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
         ])
 
-        for product in data
+        for product in data:
             for line in product['lst']:
                 writer.writerow([
                     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'
