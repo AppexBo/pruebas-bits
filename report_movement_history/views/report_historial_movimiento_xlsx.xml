@@ -1,7 +1,7 @@
 <odoo>
     <report 
         id="report_historial_movimiento_xlsx"
-        model="tu.modelo"
+        model="report_movement_history"
         string="Reporte Historial Movimiento (XLSX)"
         report_type="xlsx"
         name="report_movement_history.report_historial_movimiento_xlsx_template"
