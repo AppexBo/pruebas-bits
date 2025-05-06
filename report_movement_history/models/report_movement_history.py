@@ -1,4 +1,5 @@
 import io
+import csv
 import pytz
 import logging
 import base64
@@ -80,7 +81,26 @@ class ReportMovementHistory(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
 
-        return self.env.ref('report_movement_history.report_historial_movimiento_xlsx').report_action(self)
+        output = io.StringIO()
+        writer = csv.writer(output, delimiter=',')
+        
+        # Escribir encabezados
+        writer.writerow(["Reporte de Historial de Movimiento"])
+        writer.writerow(["Fecha", "Producto", "Cantidad", "Ubicación Origen", "Ubicación Destino"])
+        
+        # Escribir datos (ejemplo)
+        writer.writerow(["2023-10-01", "Producto Ejemplo", "10", "Almacén A", "Almacén B"])
+        
+        # Crear respuesta para descargar el archivo
+        output.seek(0)
+        xlsx_data = base64.b64encode(output.getvalue().encode('utf-8'))
+        
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/web/content/?model={self._name}&id={self.id}&filename=Reporte_Historial_Movimiento.csv&field=datas&download=true',
+            'target': 'self',
+            'data': xlsx_data,
+        }
 
         
 
