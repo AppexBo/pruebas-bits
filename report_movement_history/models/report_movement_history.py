@@ -200,9 +200,19 @@ class ReportMovementHistory(models.Model):
         ])
 
         for item in data['data']:
-            writer.writerow([
-                item['product_data'], item['lst']
-            ])  
+            if item['lst']: 
+                writer.writerow([
+                    item['product_data'],
+                    item['lst']['date'],
+                    item['lst']['picking_type'],
+                    item['lst']['in'],
+                    item['lst']['out'],
+                    item['lst']['balance'],
+                ])
+            else:
+                writer.writerow([
+                    item['product_data'], item['lst']
+                ])  
 
 
         # Preparar la respuesta para descargar el archivo
