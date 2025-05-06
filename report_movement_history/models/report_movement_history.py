@@ -79,64 +79,10 @@ class ReportMovementHistory(models.Model):
     def action_print_xlsx(self):
         if self.start_date > self.end_date:
             raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
+
+        return self.env.ref('report_movement_history.report_historial_movimiento_xlsx').report_action(self)
+
         
-        data = {
-            'start_date': self.start_date,
-            'end_date': self.end_date,
-            'location': self.location_id.id,
-            'product_ids': self.product_ids.mapped('id'),
-        }
-
-        data.update(
-            self.get_sale_details(
-                    data['start_date'], 
-                    data['end_date'], 
-                    data['location'], 
-                    data['product_ids']
-            )
-        )
-
-        # Crear el archivo Excel en memoria
-        output = io.BytesIO()
-        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
-        sheet = workbook.add_worksheet()
-
-        # Configuración de formato
-        sheet.set_paper(9)
-        sheet.set_default_row(18)
-        sheet.set_column('C:D', 12)
-        sheet.set_column('E:E', 25)
-        sheet.set_column('G:H', 12)
-
-        # Formatos
-        cell_format = workbook.add_format({'font_size': '12px'})
-        cell_format_red = workbook.add_format(
-            {'font_color': 'red', 'align': 'center', 'bold': True})
-        format1 = workbook.add_format({'font_size': '10px', 'align': 'left'})
-        head = workbook.add_format(
-            {'align': 'center', 'bold': True, 'font_size': '15px'})
-        txt = workbook.add_format({'font_size': '12px'})
-        total = workbook.add_format({'align': 'right', 'font_size': '10px'})
-        
-        # Escribir contenido
-        sheet.merge_range('B2:I3', 'ADVANCED SCRAP REPORT', head)
-        sheet.write('B6', 'From:', cell_format)
-        sheet.write('C6', data['start_date'], txt)
-        sheet.write('D6', 'To:', cell_format)
-        sheet.write('E6', data['end_date'], txt)
-
-        # Preparar y retornar la respuesta para descargar el archivo
-        xlsx_data = output.getvalue()
-        return {
-            'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=%s&id=%s&field=xlsx_file&filename_field=filename&download=true' % (
-                self._name, self.id),
-            'target': 'self',
-            'data': {
-                'xlsx_file': base64.b64encode(xlsx_data),
-                'filename': 'reporte_ventas.xlsx'
-            }
-        }
 
 
     @api.model

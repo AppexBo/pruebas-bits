@@ -1,0 +1,25 @@
+<odoo>
+    <report 
+        id="report_historial_movimiento_xlsx"
+        model="tu.modelo"
+        string="Reporte Historial Movimiento (XLSX)"
+        report_type="xlsx"
+        name="report_movement_history.report_historial_movimiento_xlsx_template"
+        file="report_movement_history.report_historial_movimiento_xlsx"
+    />
+    
+    <template id="report_historial_movimiento_xlsx_template">
+        <t t-call="report_xlsx.abstract">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="sheet_name">Historial de Movimiento</t>
+                <t t-set="headers">
+                    <row>
+                        <cell>Fecha</cell>
+                        <cell>Producto</cell>
+                        <cell>Cantidad</cell>
+                    </row>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
