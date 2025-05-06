@@ -200,9 +200,8 @@ class ReportMovementHistory(models.Model):
         ])
 
         for item in data['data']:
-            _logger.info(item['product_data'])  
             writer.writerow([
-                item['product_data']
+                item['product_data'], item['lst']
             ])  
 
 
