@@ -138,13 +138,13 @@ class ReportMovementHistory(models.Model):
                     if location == line.location_id.id:
                         # Es una SALIDA (el producto sale de esta ubicación)
                         temp_dict['out'] = line.quantity
-                        temp_dict['in'] = '--'
+                        temp_dict['in'] = 0
                         balance -= line.quantity  # Restar del balance
                         total_out += line.quantity
                     else:
                         # Es una ENTRADA (el producto entra a esta ubicación)
                         temp_dict['in'] = line.quantity
-                        temp_dict['out'] = '--'
+                        temp_dict['out'] = 0
                         balance += line.quantity  # Sumar al balance
                         total_in += line.quantity
                     
@@ -207,7 +207,7 @@ class ReportMovementHistory(models.Model):
                 full_name = "[" + product_data.default_code + "] " + product_data.name
             if item['lst']: 
                 for move in item['lst']:
-                    valor = str(move['in'] - move['out'])
+                    valor = move['in'] - move['out']
                     writer.writerow([
                         full_name,
                         move['date'],
