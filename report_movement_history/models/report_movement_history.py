@@ -219,7 +219,7 @@ class ReportMovementHistory(models.Model):
                     ])
             else:
                 writer.writerow([
-                    full_name, "-", "-", "-", "-", "-", "-"
+                    full_name, "-", "-", "-", "-", "-", "-", "-"
                 ])  
 
 
