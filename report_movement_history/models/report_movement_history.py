@@ -26,7 +26,7 @@ class ReportMovementHistory(models.Model):
                                 help="Fecha final del rango.")
     location_id = fields.Many2one('stock.location', string="Localización", required=True,
                                 help="Elegir la localización.")
-    product_ids = fields.Many2many( 'product.product', string='Productos', required=True, 
+    product_ids = fields.Many2many( 'product.product', string='Productos'
                                 help="Elegir el producto."
     )
 
