@@ -1,6 +1,7 @@
 import io
 import pytz
 import logging
+import base64
 
 from odoo import fields, api, models
 from datetime import timedelta
@@ -199,7 +200,7 @@ class ReportMovementHistory(models.Model):
         # Crear un attachment con el contenido del CSV
         attachment = self.env['ir.attachment'].create({
             'name': 'sssssss.csv',
-            'datas': fields.Binary.base64.encode(file_content),
+            'datas': base64.b64encode(file_content),
             'type': 'binary',
             'res_model': self._name,
             'res_id': self.id,
