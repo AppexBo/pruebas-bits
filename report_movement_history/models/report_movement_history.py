@@ -204,7 +204,7 @@ class ReportMovementHistory(models.Model):
                 for move in item['lst']:
                     writer.writerow([
                         item['product_data'],
-                        move['lst']['date']
+                        move['date']
                     ])
             else:
                 writer.writerow([
