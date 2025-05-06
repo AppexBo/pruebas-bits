@@ -200,8 +200,7 @@ class ReportMovementHistory(models.Model):
         ])
 
         for product in data:
-            for information in product['data']:
-                writer.writerow([information])
+            writer.writerow([product.data])
             #
             #    writer.writerow([
             #        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'
