@@ -1,8 +1,7 @@
 import io
-import csv
 import pytz
 import logging
-import base64
+import json
 
 from odoo import fields, api, models
 from datetime import timedelta
@@ -76,34 +75,6 @@ class ReportMovementHistory(models.Model):
         }
         
         return data
-
-    def action_print_xlsx(self):
-        if self.start_date > self.end_date:
-            raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
-
-        output = io.StringIO()
-        writer = csv.writer(output, delimiter=',')
-        
-        # Escribir encabezados
-        writer.writerow(["Reporte de Historial de Movimiento"])
-        writer.writerow(["Fecha", "Producto", "Cantidad", "Ubicación Origen", "Ubicación Destino"])
-        
-        # Escribir datos (ejemplo)
-        writer.writerow(["2023-10-01", "Producto Ejemplo", "10", "Almacén A", "Almacén B"])
-        
-        # Crear respuesta para descargar el archivo
-        output.seek(0)
-        xlsx_data = base64.b64encode(output.getvalue().encode('utf-8'))
-        
-        return {
-            'type': 'ir.actions.act_url',
-            'url': f'/web/content/?model={self._name}&id={self.id}&filename=Reporte_Historial_Movimiento.csv&field=datas&download=true',
-            'target': 'self',
-            'data': xlsx_data,
-        }
-
-        
-
 
     @api.model
     def get_sale_details(self, start_date=False, end_date=False, location=False, products=False):
@@ -208,8 +179,76 @@ class ReportMovementHistory(models.Model):
         
 
 
-
-
+    def action_print_xlsx(self):
+        """Prints excel report of scrap move."""
+        if self.start_date > self.end_date:
+            raise ValidationError('Start Date must be less than End Date')
+        data = {
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'location': self.location_id.id,
+            'product': self.product_id.id
+        }
+        query = """SELECT s.name as reference,t.name as product_name,p.id as 
+                tmpl_id, scrap_qty,l.name as complete_name,s.create_date,
+                scrap_location_id,s.product_id,m.product_qty as qty
+                FROM stock_scrap s
+                INNER JOIN product_product p on s.product_id = p.id
+                INNER JOIN product_template t on p.product_tmpl_id = t.id
+                INNER JOIN stock_location l on s.location_id = l.id
+                INNER JOIN stock_location k on s.scrap_location_id = k.id
+                INNER JOIN stock_move m on m.scrap_id = s.id
+                LEFT JOIN product_attribute_product_template_rel v on 
+                s.product_id = v.product_attribute_id LEFT JOIN 
+                product_attribute_value var on 
+                v.product_template_id = var.id WHERE """
+        if data['location'] and data['product']:
+            query += """s.location_id = %s and s.product_id = %s and 
+                    s.create_date between %s and %s and  m.company_id = %s"""
+            filter_values = (data['location'], data['product'],
+                             data['start_date'], data['end_date'],
+                             self.env.user.company_id.id)
+            self._cr.execute(query, filter_values)
+            record = self._cr.dictfetchall()
+        elif data['location']:
+            query += """s.location_id = %s and s.create_date between %s and %s 
+                    and m.company_id = %s"""
+            filter_values = (data['location'], data['start_date'],
+                             data['end_date'], self.env.user.company_id.id)
+            self._cr.execute(query, filter_values)
+            record = self._cr.dictfetchall()
+        elif data['product']:
+            query += """s.create_date between %s and %s and p.id = %s and
+                     m.company_id = %s"""
+            filter_values = data['start_date'], data['end_date'], data[
+                'product'], self.env.user.company_id.id
+            self._cr.execute(query, filter_values)
+            record = self._cr.dictfetchall()
+        else:
+            query += """s.create_date between %s and %s and m.company_id = %s"""
+            filter_values = (data['start_date'], data['end_date'],
+                             self.env.user.company_id.id)
+            self._cr.execute(query, filter_values)
+            record = self._cr.dictfetchall()
+        for val in record:
+            product_id = self.env['product.product'].browse(val['tmpl_id'])
+            val.update({
+                'price': product_id.standard_price
+            })
+            val['display_name'] = self.env['product.product'].search(
+                [('id', '=', val['product_id'])]).display_name
+            val['date_create'] = str(val['create_date']).split()[0]
+        data['record'] = record
+        return {
+            'type': 'ir.actions.report',
+            'data': {'model': 'scrap.move.report',
+                     'options': json.dumps(data,
+                                           default=date_utils.json_default),
+                     'output_format': 'xlsx',
+                     'report_name': 'Scrap Move Excel Report',
+                     },
+            'report_type': 'scrap_move_report_xlsx'
+        }
 
     #def action_get_xlsx_report(self, data, response):
     
