@@ -170,21 +170,61 @@ class ReportMovementHistory(models.Model):
         return code.replace('_', " ").title() if code else code
 
 
-        
-        
-        
-
-
     def action_print_csv(self):
         # Crear el contenido del CSV
         output = io.BytesIO()
         writer = pycompat.csv_writer(output, quoting=1)
+        #aqui obtengo la data que deberia obtener
+        if self.start_date > self.end_date:
+            raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
         
+        data = {
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'location': self.location_id.id,
+            'product_ids': self.product_ids.mapped('id'),
+        }
+
+        data.update(
+            self.get_sale_details(
+                    data['start_date'], 
+                    data['end_date'], 
+                    data['location'], 
+                    data['product_ids']
+            )
+        )
+
         # Escribir el encabezado
-        writer.writerow(["A"])
+        writer.writerow([
+            'Producto', 'Código', 'Fecha', 'Tipo Movimiento', 'Entrada', 'Salida', 'Saldo'
+        ])
+
+        # Obtener productos para tener sus nombres
+        products = self.env['product.product'].browse(data['product_ids'])
         
-        # Escribir los datos
-        writer.writerow(["1 hola"])
+        for product_data in data['data']:
+            product = products.filtered(lambda p: p.id == product_data['product_data']['id'])
+            
+            for move in product_data['lst']:
+                move_type = move['picking_type']
+                if move_type == 'Outgoing':
+                    move_type_str = 'Saliente'
+                elif move_type == 'Incoming':
+                    move_type_str = 'Entrante'
+                elif move_type == 'Internal':
+                    move_type_str = 'Traspaso'
+                else:
+                    move_type_str = move_type
+                
+                writer.writerow([
+                    product.name,
+                    product.default_code or '',
+                    move['date'],
+                    move_type_str,
+                    move['in'],
+                    move['out'],
+                    move['balance'],
+                ])
         
         # Preparar la respuesta para descargar el archivo
         output.seek(0)
@@ -199,7 +239,7 @@ class ReportMovementHistory(models.Model):
     def _create_attachment(self, file_content):
         # Crear un attachment con el contenido del CSV
         attachment = self.env['ir.attachment'].create({
-            'name': 'sssssss.csv',
+            'name': 'Reporte de Historial de Movimiento.csv',
             'datas': base64.b64encode(file_content),
             'type': 'binary',
             'res_model': self._name,
@@ -207,7 +247,3 @@ class ReportMovementHistory(models.Model):
             'mimetype': 'text/csv',
         })
         return attachment
-
-
-    #def action_get_xlsx_report(self, data, response):
-    
