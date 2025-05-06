@@ -13,7 +13,7 @@
         'security/ir.model.access.csv',
         
         'views/report_movement_history_views.xml',
-        'views/report_historial_movimiento_xlsx',
+        'views/report_historial_movimiento_xlsx.xml',
         
         'report/moves_report_pdf.xml',
     ],
