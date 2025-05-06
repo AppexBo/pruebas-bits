@@ -197,7 +197,7 @@ class ReportMovementHistory(models.Model):
         
         # Escribir el encabezado
         writer.writerow([
-            'Producto', 'Fecha', 'Tipo Movimiento', 'Referencia', 'Cantidad', 'Cantidad Contada', 'Diferencia'
+            'Fecha', 'Tipo Movimiento', 'Producto', 'Referencia', 'Cantidad', 'Cantidad Contada', 'Diferencia'
         ])
 
         for item in data['data']:
@@ -209,9 +209,9 @@ class ReportMovementHistory(models.Model):
                 for move in item['lst']:
                     valor = move['in'] - move['out']
                     writer.writerow([
-                        full_name,
                         move['date'],
                         move['picking_type'],
+                        full_name,
                         move['reference'],
                         move['balance_actual_sin_modificar'],
                         move['balance'],
@@ -219,7 +219,7 @@ class ReportMovementHistory(models.Model):
                     ])
             else:
                 writer.writerow([
-                    full_name, "-", "-", "-", "-", "-", "-"
+                    "-", "-", full_name, "-", "-", "-", "-"
                 ])  
 
 
