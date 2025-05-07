@@ -247,14 +247,6 @@ class ReportMovementHistory(models.Model):
         return attachment
 
 
-
-
-
-
-
-
-
-
     def action_print_xlsx(self):
         if self.start_date > self.end_date:
             raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
