@@ -2,6 +2,7 @@ import io
 import pytz
 import logging
 import base64
+import openpyxl
 
 from odoo import fields, api, models
 from datetime import timedelta
@@ -242,5 +243,92 @@ class ReportMovementHistory(models.Model):
             'res_model': self._name,
             'res_id': self.id,
             'mimetype': 'text/csv',
+        })
+        return attachment
+
+
+
+
+
+
+
+
+
+
+    def action_print_xlsx(self):
+        if self.start_date > self.end_date:
+            raise ValidationError('La fecha de inicio debe ser menor que la fecha de finalización')
+        
+        # Crear un nuevo libro de Excel
+        output = io.BytesIO()
+        workbook = openpyxl.Workbook()
+        worksheet = workbook.active
+        worksheet.title = "Reporte de Movimientos"
+
+        # Escribir el encabezado
+        headers = ['Fecha', 'Tipo Movimiento', 'Producto', 'Referencia', 'Cantidad', 'Cantidad Contada', 'Diferencia']
+        for col, header in enumerate(headers, 1):
+            worksheet.cell(row=1, column=col, value=header)
+
+        # Obtener los datos
+        data = {
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'location': self.location_id.id,
+            'product_ids': self.env['product.product'].search([('active', '=', True)]).ids,
+        }
+
+        data.update(
+            self.get_sale_details(
+                data['start_date'], 
+                data['end_date'], 
+                data['location'], 
+                data['product_ids']
+            )
+        )
+
+        # Escribir los datos
+        row = 2
+        for item in data['data']:
+            product_data = self.env['product.product'].browse(item['product_data'])
+            full_name = product_data.name
+            if product_data.default_code:
+                full_name = f"[{product_data.default_code}] {product_data.name}"
+            
+            if item['lst']: 
+                for move in item['lst']:
+                    valor = move['in'] - move['out']
+                    worksheet.cell(row=row, column=1, value=move['date'])
+                    worksheet.cell(row=row, column=2, value=move['picking_type'])
+                    worksheet.cell(row=row, column=3, value=full_name)
+                    worksheet.cell(row=row, column=4, value=move['reference'])
+                    worksheet.cell(row=row, column=5, value=move['balance_actual_sin_modificar'])
+                    worksheet.cell(row=row, column=6, value=move['balance'])
+                    worksheet.cell(row=row, column=7, value=valor)
+                    row += 1
+            else:
+                worksheet.cell(row=row, column=3, value=full_name)
+                row += 1
+
+        # Guardar el libro de trabajo en el buffer
+        workbook.save(output)
+        output.seek(0)
+        file_content = output.getvalue()
+
+        # Crear y devolver el attachment
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=ir.attachment&field=datas&filename_field=name&id=%s' % self._create_xlsx_attachment(file_content).id,
+            'target': 'self',
+        }
+
+    def _create_xlsx_attachment(self, file_content):
+        attachment = self.env['ir.attachment'].create({
+            'name': 'Reporte de Historial de Movimiento.xlsx',
+            'datas': base64.b64encode(file_content),
+            'type': 'binary',
+            'res_model': self._name,
+            'res_id': self.id,
+            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         })
         return attachment
