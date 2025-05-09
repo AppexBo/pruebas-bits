@@ -138,14 +138,14 @@ class ReportMovementHistory(models.Model):
                     
                     if location == line.location_id.id:
                         # Es una SALIDA (el producto sale de esta ubicación)
-                        temp_dict['out'] = "{:.4f}".format(line.quantity) 
-                        temp_dict['in'] = "{:.4f}".format(0)
+                        temp_dict['out'] = line.quantity 
+                        temp_dict['in'] = 0
                         balance -= line.quantity  # Restar del balance
                         total_out += line.quantity
                     else:
                         # Es una ENTRADA (el producto entra a esta ubicación)
-                        temp_dict['in'] = "{:.4f}".format(line.quantity) 
-                        temp_dict['out'] = "{:.4f}".format(0)
+                        temp_dict['in'] = line.quantity 
+                        temp_dict['out'] = 0
                         balance += line.quantity  # Sumar al balance
                         total_in += line.quantity
                     

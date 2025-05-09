@@ -88,8 +88,8 @@
                                                 <t t-else="" t-esc="move['picking_type']"/>
                                             </td>
                                             <td t-esc="move['reference']"/>
-                                            <td t-esc="move['in']"/>
-                                            <td t-esc="move['out']"/>
+                                            <td t-esc="'{:.4f}'.format(move['in'])"/>
+                                            <td t-esc="'{:.4f}'.format(move['out'])"/>
                                             <td t-esc="move['balance']"/>
                                         </tr>
                                     </t>
