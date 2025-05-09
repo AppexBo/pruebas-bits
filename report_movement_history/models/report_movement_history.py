@@ -130,7 +130,6 @@ class ReportMovementHistory(models.Model):
                     for line in moves
                     if line.date <= date_start
                 ), 4)
-                balance = "{0:.4f}".format(balance)
                 opening_balance = balance
                 moves = moves.filtered(lambda r: r.date >= date_start)
                 for line in moves:
@@ -158,10 +157,10 @@ class ReportMovementHistory(models.Model):
                     temp_dict['balance_actual_sin_modificar'] = balance_actual_sin_modificar
 
                     lst.append(temp_dict)
-
+                
             yield {
-                'opening_balance': opening_balance,
-                'balance': balance,
+                'opening_balance': "{0:.4f}".format(opening_balance),
+                'balance': "{0:.4f}".format(balance),
                 'total_in': "{:.4f}".format(total_in),
                 'total_out': "{:.4f}".format(total_out),
                 'lst': lst,
@@ -290,7 +289,7 @@ class ReportMovementHistory(models.Model):
             
             if item['lst']: 
                 for move in item['lst']:
-                    valor = move['in'] - move['out']
+                    valor = "{:.4f}".format(move['in'] - move['out'])
                     worksheet.cell(row=row, column=1, value=move['date'])
                     worksheet.cell(row=row, column=2, value=move['picking_type'])
                     worksheet.cell(row=row, column=3, value=full_name)
