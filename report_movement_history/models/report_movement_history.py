@@ -133,7 +133,7 @@ class ReportMovementHistory(models.Model):
                 opening_balance = balance
                 moves = moves.filtered(lambda r: r.date >= date_start)
                 for line in moves:
-                    balance_actual_sin_modificar = balance
+                    balance_actual_sin_modificar = "{0:.4f}".format(balance)
                     temp_dict = {}
                     
                     if location == line.location_id.id:
@@ -152,7 +152,7 @@ class ReportMovementHistory(models.Model):
                     # Agregar información adicional
                     temp_dict['date'] = line.date
                     temp_dict['picking_type'] = self.substitute(line.picking_code or '')  # Usar picking_code en lugar de picking_type_id.code
-                    temp_dict['balance'] = balance
+                    temp_dict['balance'] = "{0:.4f}".format(balance)
                     temp_dict['reference'] = line.reference or line.move_id.reference or line.picking_id.name or ''
                     temp_dict['balance_actual_sin_modificar'] = balance_actual_sin_modificar
 
