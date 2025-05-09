@@ -129,7 +129,8 @@ class ReportMovementHistory(models.Model):
                     -line.quantity if line.location_id.id == location else line.quantity
                     for line in moves
                     if line.date <= date_start
-                ), 2)
+                ), 4)
+                balance = "{0:.4f}".format(balance)
                 opening_balance = balance
                 moves = moves.filtered(lambda r: r.date >= date_start)
                 for line in moves:
@@ -138,14 +139,14 @@ class ReportMovementHistory(models.Model):
                     
                     if location == line.location_id.id:
                         # Es una SALIDA (el producto sale de esta ubicación)
-                        temp_dict['out'] = line.quantity
-                        temp_dict['in'] = 0
+                        temp_dict['out'] = "{:.4f}".format(line.quantity) 
+                        temp_dict['in'] = "{:.4f}".format(0)
                         balance -= line.quantity  # Restar del balance
                         total_out += line.quantity
                     else:
                         # Es una ENTRADA (el producto entra a esta ubicación)
-                        temp_dict['in'] = line.quantity
-                        temp_dict['out'] = 0
+                        temp_dict['in'] = "{:.4f}".format(line.quantity) 
+                        temp_dict['out'] = "{:.4f}".format(0)
                         balance += line.quantity  # Sumar al balance
                         total_in += line.quantity
                     
@@ -161,8 +162,8 @@ class ReportMovementHistory(models.Model):
             yield {
                 'opening_balance': opening_balance,
                 'balance': balance,
-                'total_in': total_in,
-                'total_out': total_out,
+                'total_in': "{:.4f}".format(total_in),
+                'total_out': "{:.4f}".format(total_out),
                 'lst': lst,
                 'product_data': product,
             }
@@ -208,7 +209,7 @@ class ReportMovementHistory(models.Model):
                 full_name = "[" + product_data.default_code + "] " + product_data.name
             if item['lst']: 
                 for move in item['lst']:
-                    valor = move['in'] - move['out']
+                    valor = "{:.4f}".format(move['in'] - move['out'])
                     writer.writerow([
                         move['date'],
                         move['picking_type'],
