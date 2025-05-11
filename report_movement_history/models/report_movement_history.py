@@ -258,7 +258,7 @@ class ReportMovementHistory(models.Model):
         worksheet.title = "Reporte de Movimientos"
 
         # Escribir el encabezado
-        headers = ['Fecha', 'Tipo Movimiento', 'Producto', 'Referencia', 'Cantidad', 'Cantidad Contada', 'Diferencia']
+        headers = ['Fecha', 'Tipo Movimiento', 'Producto', 'Referencia', 'Unidad de Medida', 'Costo del Producto', 'Cantidad', 'Cantidad Contada', 'Diferencia']
         for col, header in enumerate(headers, 1):
             worksheet.cell(row=1, column=col, value=header)
 
@@ -284,6 +284,8 @@ class ReportMovementHistory(models.Model):
         for item in data['data']:
             product_data = self.env['product.product'].browse(item['product_data'])
             full_name = product_data.name
+            product_uom = product_data.uom_name
+            product_standard_price = "{:.4f}".format(product_data.standard_price)
             if product_data.default_code:
                 full_name = f"[{product_data.default_code}] {product_data.name}"
             
@@ -294,9 +296,11 @@ class ReportMovementHistory(models.Model):
                     worksheet.cell(row=row, column=2, value=move['picking_type'])
                     worksheet.cell(row=row, column=3, value=full_name)
                     worksheet.cell(row=row, column=4, value=move['reference'])
-                    worksheet.cell(row=row, column=5, value=move['balance_actual_sin_modificar'])
-                    worksheet.cell(row=row, column=6, value=move['balance'])
-                    worksheet.cell(row=row, column=7, value=valor)
+                    worksheet.cell(row=row, column=5, value=product_uom)
+                    worksheet.cell(row=row, column=6, value=product_standard_price)
+                    worksheet.cell(row=row, column=7, value=move['balance_actual_sin_modificar'])
+                    worksheet.cell(row=row, column=8, value=move['balance'])
+                    worksheet.cell(row=row, column=9, value=valor)
                     row += 1
             else:
                 worksheet.cell(row=row, column=3, value=full_name)
